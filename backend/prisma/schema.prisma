@@ -1,15 +1,17 @@
 generator client {
   provider = "prisma-client"
-  output = "../generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
+  id           Int    @id @default(autoincrement())
+  email        String @unique
   passwordHash String @map("password")
 
   @@map("user")
