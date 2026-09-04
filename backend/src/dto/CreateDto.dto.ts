@@ -1,9 +1,13 @@
-import { IsNumber } from 'class-validator';
+import { IsEmail, IsString, MinLength } from 'class-validator';
 
 export class CreateDto {
-  @IsNumber()
-  id: number;
+  @IsString()
+  username: string;
+
+  @IsEmail()
   email: string;
-  passwordHash: string;
-  createdAt: Date;
+
+  @IsString()
+  @MinLength(6)
+  password: string;
 }
