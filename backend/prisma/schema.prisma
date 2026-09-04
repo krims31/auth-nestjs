@@ -11,7 +11,7 @@ model User {
   id           Int      @id @default(autoincrement())
   email        String   @unique
   passwordHash String   @map("password")
-  createAt     DateTime @default(now())
+  createdAt     DateTime @default(now())
 
   @@map("user")
 }
