@@ -4,13 +4,14 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
+  provider = "postgresql"
 }
 
 model User {
-  id           Int    @id @default(autoincrement())
-  email        String @unique
-  passwordHash String @map("password")
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String   @map("password")
+  createAt     DateTime @default(now())
 
   @@map("user")
 }
