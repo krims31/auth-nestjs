@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common'
 
 @Injectable()
-export class UsersService {}
+export class UsersService {
+	create(createDto: CreateDto) {
+		return 'This action adds a new user';
+	}
+}
