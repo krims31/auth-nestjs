@@ -16,6 +16,12 @@ export class UsersService {
         email: dto.email,
         passwordHash,
       },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        createdAt: true,
+      },
     });
   }
 }
