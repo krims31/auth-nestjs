@@ -1,6 +1,6 @@
-import 'dotenv/config';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import 'dotenv/config';
 import 'reflect-metadata';
 import { AppModule } from './app.module';
 
@@ -16,4 +16,7 @@ async function bootstrap() {
   );
   await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
+bootstrap().catch((err) => {
+  console.error('Failed to start server', err);
+  process.exit(1);
+});
