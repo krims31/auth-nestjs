@@ -11,12 +11,14 @@ import { RolesGuard } from './RolesGuard';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  // Получать id токена
   @UseGuards(JwtAuthGuard)
   @Get('me')
   getMe(@Req() req: Request) {
     return req.user;
   }
 
+  // Только для админов
   @Roles('ADMIN')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get('admin')
@@ -24,11 +26,13 @@ export class AuthController {
     return { message: 'Welcome, admin!' };
   }
 
+  // Регистрация пользователя
   @Post('register')
   async register(@Body() dto: CreateDto) {
     return await this.authService.register(dto);
   }
 
+  // Логин пользователя
   @Post('login')
   async login(@Body() dto: LoginDto) {
     return await this.authService.login(dto);
