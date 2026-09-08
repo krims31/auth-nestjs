@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
-import { Request } from 'express';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { CurrentUser } from '../common/decorators/currentUser.decorator';
 import { Roles } from '../common/decorators/roles.decorator';
 import { CreateDto } from '../dto/CreateDto.dto';
 import { LoginDto } from '../dto/LoginDto.dto';
@@ -14,16 +14,16 @@ export class AuthController {
   // Получать id токена
   @UseGuards(JwtAuthGuard)
   @Get('me')
-  getMe(@Req() req: Request) {
-    return req.user;
+  getMe(@CurrentUser() user: Express.User) {
+    return user;
   }
 
   // Только для админов
   @Roles('ADMIN')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get('admin')
-  getAdmin() {
-    return { message: 'Welcome, admin!' };
+  getAdmin(@CurrentUser() user: Express.User) {
+    return user;
   }
 
   // Регистрация пользователя
