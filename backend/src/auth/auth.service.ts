@@ -35,6 +35,10 @@ export class AuthService {
         email: user.email,
         role: user.role,
       }),
+      refresh_token: this.jwtService.sign(
+        { sub: user.id },
+        { secret: process.env.JWT_REFRESH_TOKEN, expiresIn: '7d' },
+      ),
     };
   }
 }
