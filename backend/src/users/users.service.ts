@@ -47,6 +47,14 @@ export class UsersService {
     });
   }
 
+  // Очистка хеш refresh-токена
+  async clearRefreshToken(userId: string) {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: { refreshTokenHash: null },
+    });
+  }
+
   // Поиск пользователя по id
   async findById(id: string) {
     return await this.prisma.user.findUnique({ where: { id } });
