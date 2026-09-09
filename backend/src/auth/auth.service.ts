@@ -89,4 +89,8 @@ export class AuthService {
       refresh_token: refreshToken,
     };
   }
+
+  async logout(userId: string) {
+    return await this.usersService.clearRefreshToken(userId);
+  }
 }
