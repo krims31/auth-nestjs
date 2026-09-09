@@ -38,6 +38,13 @@ export class AuthController {
     return await this.authService.login(dto);
   }
 
+  // Выход из аккаунта
+  @UseGuards(JwtAuthGuard)
+  @Post('logout')
+  async logout(@CurrentUser() user: Express.User) {
+    return await this.authService.logout(user.id);
+  }
+
   // Обновление токена
   @Post('refresh')
   async refresh(@Body('refresh_token') refreshToken: string) {
