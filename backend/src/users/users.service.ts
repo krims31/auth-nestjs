@@ -47,6 +47,11 @@ export class UsersService {
     });
   }
 
+  // Поиск пользователя по id
+  async findById(id: string) {
+    return await this.prisma.user.findUnique({ where: { id } });
+  }
+
   // Поиск пользователя по email
   async findByEmail(email: string) {
     return await this.prisma.user.findUnique({ where: { email } });
