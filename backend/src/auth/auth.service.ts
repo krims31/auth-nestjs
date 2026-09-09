@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { CreateDto } from '../dto/CreateDto.dto';
 import { LoginDto } from '../dto/LoginDto.dto';
@@ -15,6 +15,44 @@ export class AuthService {
   // Регистрация пользователя
   async register(dto: CreateDto) {
     return await this.usersService.create(dto);
+  }
+
+  // Обновление токена
+  async refreshToken(refreshToken: string) {
+    try {
+      const payload = this.jwtService.verify<{ sub: string }>(refreshToken, {
+        secret: process.env.JWT_REFRESH_SECRET,
+      });
+
+      const user = await this.usersService.findById(payload.sub);
+
+      if (!user) {
+        throw new UnauthorizedException('Invalid refresh token');
+      }
+
+      const isValid = await bcrypt.compare(
+        refreshToken,
+        user.refreshTokenHash || '',
+      );
+
+      if (!isValid) {
+        throw new UnauthorizedException('Invalid refresh token');
+      }
+
+      return {
+        access_token: this.jwtService.sign({
+          sub: user.id,
+          email: user.email,
+          role: user.role,
+        }),
+      };
+    } catch (error) {
+      if (error instanceof TokenExpiredError) {
+        throw new UnauthorizedException('Refresh token expired');
+      } else {
+        throw new UnauthorizedException('Invalid refresh token');
+      }
+    }
   }
 
   // Логин пользователя
