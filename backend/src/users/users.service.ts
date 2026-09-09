@@ -52,6 +52,13 @@ export class UsersService {
     return this.prisma.user.update({
       where: { id: userId },
       data: { refreshTokenHash: null },
+      select: {
+        id: true,
+        username: true,
+        role: true,
+        createdAt: true,
+        email: true,
+      },
     });
   }
 
