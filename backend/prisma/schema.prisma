@@ -23,3 +23,11 @@ model User {
 
   @@map("user")
 }
+
+model Project {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  ownerId     String
+  createdAt   DateTime @default(now())
+}
