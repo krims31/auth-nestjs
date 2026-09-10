@@ -16,10 +16,12 @@ export class ProjectsService {
     });
   }
 
+  // Ищет и возвращает все проекты пользователя
   async findAllByUser(ownerId: string) {
     return await this.prisma.project.findMany({ where: { ownerId } });
   }
 
+  // Находит конкретный проект с проверкой владельца и проверяет на наличие проекта
   async findOne(id: string, ownerId: string) {
     const project = await this.prisma.project.findFirst({
       where: { id, ownerId },
