@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProjectDto } from '../dto/CreateProject.dto';
+import { UpdateProjectDto } from '../dto/UpdateProjectDto.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -31,5 +32,24 @@ export class ProjectsService {
       throw new NotFoundException('Project not found');
     }
     return project;
+  }
+
+  // Обновление проекта (с проверкой владельца)
+  async update(id: string, ownerId: string, dto: UpdateProjectDto) {
+    await this.findOne(id, ownerId);
+
+    return await this.prisma.project.update({
+      where: { id },
+      data: dto,
+    });
+  }
+
+  // Удаление проекта (с проверкой владельца)
+  async delete(id: string, ownerId: string) {
+    await this.findOne(id, ownerId);
+
+    return await this.prisma.project.delete({
+      where: { id },
+    });
   }
 }
