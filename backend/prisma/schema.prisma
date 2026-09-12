@@ -12,6 +12,12 @@ enum Role {
   ADMIN
 }
 
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
 model User {
   id               String    @id @default(uuid())
   username         String
@@ -32,6 +38,18 @@ model Project {
   owner       User     @relation(fields: [ownerId], references: [id])
   ownerId     String
   createdAt   DateTime @default(now())
+  tasks       Task[]
 
   @@map("project")
+}
+
+model Task {
+  id        String     @id @default(uuid())
+  title     String
+  status    TaskStatus @default(TODO)
+  project   Project    @relation(fields: [projectId], references: [id])
+  projectId String
+  createdAt DateTime   @default(now())
+
+  @@map("task")
 }
