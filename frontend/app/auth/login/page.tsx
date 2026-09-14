@@ -1,7 +1,9 @@
+import  LoginForm  from '@/features/auth-by-email/ui/LoginForm'
+
 export default function Login() {
 	return (
 		<>
-			<h1>Login</h1>
+			<LoginForm />
 		</>
-	)	
+	)
 }
