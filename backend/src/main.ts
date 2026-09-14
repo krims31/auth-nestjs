@@ -15,6 +15,11 @@ async function bootstrap() {
     }),
   );
   await app.listen(process.env.PORT ?? 3000);
+
+  app.enableCors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+  });
 }
 bootstrap().catch((err) => {
   console.error('Failed to start server', err);
