@@ -7,9 +7,13 @@ export default function LoginForm() {
 	const { password, setPassword, handleSubmit } = useAuthLogin()
 	return (
 		<>
-			<form>
-				<InputEmail />
-			</form>
+			<div className="flex items-center justify-center h-200">
+				<div className="border rounded-2xl w-100 h-120">
+					<form>
+						<InputEmail />
+					</form>
+				</div>
+			</div>
 		</>
 	)
 }
