@@ -20,7 +20,7 @@ export default function LoginForm() {
 						<p className="relative top-15 left-15 text-[15px] font-mono">
 							Don`t have an account yet?
 							<Link
-								href="/register"
+								href="/auth/register"
 								className="text-blue-600 relative left-2 underline"
 							>
 								Sign Up
