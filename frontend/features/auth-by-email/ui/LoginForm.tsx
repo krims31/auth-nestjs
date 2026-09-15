@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+import Button from '../../../components/ui/buttonLogin'
 import InputEmail from '../../../shared/ui/input-email/inputEmail'
 import InputPassword from '../../../shared/ui/input-password/inputPassword'
 import { useAuthLogin } from '../model/useAuthLogin'
@@ -15,6 +17,15 @@ export default function LoginForm() {
 						<h1 className="text-center relative top-10 text-2xl font-mono">
 							Sign In
 						</h1>
+						<p className="relative top-15 left-15 text-[15px] font-mono">
+							Don`t have an account yet?
+							<Link
+								href="/register"
+								className="text-blue-600 relative left-2 underline"
+							>
+								Sign Up
+							</Link>
+						</p>
 					</section>
 					<form onSubmit={handleSubmit}>
 						<InputEmail
@@ -25,12 +36,7 @@ export default function LoginForm() {
 							value={password}
 							onChange={setPassword}
 						/>
-						<button
-							type="submit"
-							className="border rounded-[10px] w-80 h-12 flex justify-center items-center relative top-50 left-11 text-[15px] font-mono bg-black text-white hover:bg-blue-600 transform duration-300 ease-in-out"
-						>
-							Login
-						</button>
+						<Button />
 					</form>
 				</div>
 			</div>

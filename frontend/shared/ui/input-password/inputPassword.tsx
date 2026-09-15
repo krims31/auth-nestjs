@@ -9,7 +9,7 @@ export default function InputPassword({ value, onChange }: InputPasswordProps) {
 		<Field>
 			<FieldLabel
 				htmlFor="password"
-				className="relative top-40 left-10 text-[15px] font-mono"
+				className="relative top-35 left-10 text-[15px] font-mono"
 			>
 				Password
 			</FieldLabel>
@@ -18,7 +18,7 @@ export default function InputPassword({ value, onChange }: InputPasswordProps) {
 				onChange={e => onChange(e.target.value)}
 				type="password"
 				placeholder="Password"
-				className="relative top-40 left-10 font-mono"
+				className="relative top-35 left-10 font-mono"
 			/>
 		</Field>
 	)
