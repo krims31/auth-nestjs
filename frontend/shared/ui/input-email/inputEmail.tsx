@@ -7,7 +7,7 @@ export default function InputEmail({ value, onChange }: InputEmailProps) {
 		<Field>
 			<FieldLabel
 				htmlFor="email"
-				className="relative top-30 left-10 text-[15px] font-mono"
+				className="relative top-25 left-10 text-[15px] font-mono"
 			>
 				Email
 			</FieldLabel>
@@ -16,7 +16,7 @@ export default function InputEmail({ value, onChange }: InputEmailProps) {
 				onChange={e => onChange(e.target.value)}
 				type="email"
 				placeholder="Email"
-				className="relative top-30 left-10 font-mono"
+				className="relative top-25 left-10 font-mono w-87.5!"
 			/>
 		</Field>
 	)
