@@ -6,12 +6,18 @@ export default function InputEmail() {
 	const { email, setEmail } = useAuthLogin()
 	return (
 		<Field>
-			<FieldLabel htmlFor="">Email</FieldLabel>
+			<FieldLabel
+				htmlFor="email"
+				className="relative top-40 left-10 text-xl font-mono"
+			>
+				Email
+			</FieldLabel>
 			<Input
 				value={email}
 				onChange={e => setEmail(e.target.value)}
 				type="email"
 				placeholder="Email"
+				className="relative top-40 left-10 text-xl font-mono"
 			/>
 		</Field>
 	)
