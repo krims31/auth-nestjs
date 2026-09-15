@@ -1,9 +1,8 @@
 import { Field, FieldLabel } from '../../../components/ui/field'
 import { Input } from '../../../components/ui/input'
-import { useAuthLogin } from '../../../features/auth-by-email/model/useAuthLogin'
+import { InputEmailProps } from '../../../features/auth-by-email/model/interfaces/InputEmailProps'
 
-export default function InputEmail() {
-	const { email, setEmail } = useAuthLogin()
+export default function InputEmail({ value, onChange }: InputEmailProps) {
 	return (
 		<Field>
 			<FieldLabel
@@ -13,8 +12,8 @@ export default function InputEmail() {
 				Email
 			</FieldLabel>
 			<Input
-				value={email}
-				onChange={e => setEmail(e.target.value)}
+				value={value}
+				onChange={e => onChange(e.target.value)}
 				type="email"
 				placeholder="Email"
 				className="relative top-40 left-10 font-mono"

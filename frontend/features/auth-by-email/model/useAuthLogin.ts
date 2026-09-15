@@ -5,8 +5,9 @@ import { useState } from 'react'
 
 export const useAuthLogin = () => {
 	const router = useRouter()
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+	const [email, setEmail] = useState<string>('')
+	const [password, setPassword] = useState<string>('')
+	const [visible, setVisible] = useState<boolean>(false)
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -29,6 +30,8 @@ export const useAuthLogin = () => {
 		setEmail,
 		password,
 		setPassword,
-		handleSubmit
+		handleSubmit,
+		visible,
+		setVisible
 	}
 }
