@@ -1,3 +1,4 @@
+import { Eye, EyeOff } from 'lucide-react'
 import { Field, FieldLabel } from '../../../components/ui/field'
 import { Input } from '../../../components/ui/input'
 import { InputPasswordProps } from '../../../features/auth-by-email/model/interfaces/InputPasswordProps'
@@ -16,10 +17,17 @@ export default function InputPassword({ value, onChange }: InputPasswordProps) {
 			<Input
 				value={value}
 				onChange={e => onChange(e.target.value)}
-				type="password"
+				type={visible ? 'text' : 'password'}
 				placeholder="Password"
 				className="relative top-30 left-10 font-mono w-87.5!"
 			/>
+			<button
+				type="button"
+				onClick={() => setVisible(!visible)}
+				className="relative top-21.5 left-89"
+			>
+				{visible ? <EyeOff size={20} /> : <Eye size={20} />}
+			</button>
 		</Field>
 	)
 }
