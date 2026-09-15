@@ -8,7 +8,7 @@ export default function InputEmail() {
 		<Field>
 			<FieldLabel
 				htmlFor="email"
-				className="relative top-40 left-10 text-xl font-mono"
+				className="relative top-40 left-10 text-[15px] font-mono"
 			>
 				Email
 			</FieldLabel>
@@ -17,7 +17,7 @@ export default function InputEmail() {
 				onChange={e => setEmail(e.target.value)}
 				type="email"
 				placeholder="Email"
-				className="relative top-40 left-10 text-xl font-mono"
+				className="relative top-40 left-10 font-mono"
 			/>
 		</Field>
 	)
