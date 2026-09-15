@@ -1,3 +1,4 @@
+import { Mail } from 'lucide-react'
 import { Field, FieldLabel } from '../../../components/ui/field'
 import { Input } from '../../../components/ui/input'
 import { InputEmailProps } from '../../../features/auth-by-email/model/interfaces/InputEmailProps'
@@ -18,6 +19,12 @@ export default function InputEmail({ value, onChange }: InputEmailProps) {
 				placeholder="Email"
 				className="relative top-25 left-10 font-mono w-87.5!"
 			/>
+			<button>
+				<Mail
+					size={20}
+					className="relative top-16.5 left-89"
+				/>
+			</button>
 		</Field>
 	)
 }
