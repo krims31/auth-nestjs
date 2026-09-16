@@ -1,7 +1,6 @@
 'use client'
 
-import Link from 'next/link'
-import Button from '../../../components/ui/buttonLogin'
+import ButtonRegister from '../../../components/ui/buttonRegister'
 import InputEmail from '../../../shared/ui/input-email/inputEmail'
 import InputPassword from '../../../shared/ui/input-password/inputPassword'
 import useAuthRegister from '../model/useAuthRegister'
@@ -22,17 +21,8 @@ export default function RegisterForm() {
 				<div className="border rounded-2xl w-100 h-120">
 					<section>
 						<h1 className="text-center relative top-10 text-2xl font-mono">
-							Sign In
+							Sign Up
 						</h1>
-						<p className="relative top-15 left-15 text-[15px] font-mono">
-							Don`t have an account yet?
-							<Link
-								href="/auth/register"
-								className="text-blue-600 relative left-2 underline"
-							>
-								Sign Up
-							</Link>
-						</p>
 					</section>
 					<form onSubmit={handleSubmitRegister}>
 						<InputEmail
@@ -43,7 +33,7 @@ export default function RegisterForm() {
 							value={password}
 							onChange={setPassword}
 						/>
-						<Button />
+						<ButtonRegister />
 					</form>
 				</div>
 			</div>
