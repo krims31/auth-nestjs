@@ -17,12 +17,12 @@ export default function InputEmail({ value, onChange }: InputEmailProps) {
 				onChange={e => onChange(e.target.value)}
 				type="email"
 				placeholder="Email"
-				className="relative top-25 left-10 font-mono w-87.5!"
+				className="relative top-25 left-10 font-mono w-85!"
 			/>
 			<button>
 				<Mail
 					size={20}
-					className="relative top-16.5 left-89"
+					className="relative top-16.5 left-87"
 				/>
 			</button>
 		</Field>
