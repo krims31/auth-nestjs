@@ -19,12 +19,12 @@ export default function InputPassword({ value, onChange }: InputPasswordProps) {
 				onChange={e => onChange(e.target.value)}
 				type={visible ? 'text' : 'password'}
 				placeholder="Password"
-				className="relative top-25 left-10 font-mono w-87.5!"
+				className="relative top-25 left-10 font-mono w-85!"
 			/>
 			<button
 				type="button"
 				onClick={() => setVisible(!visible)}
-				className="relative top-16.5 left-89"
+				className="relative top-16.5 left-87"
 			>
 				{visible ? <EyeOff size={20} /> : <Eye size={20} />}
 			</button>
