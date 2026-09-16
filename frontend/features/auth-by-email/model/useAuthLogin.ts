@@ -12,17 +12,25 @@ export const useAuthLogin = () => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
-		const isSuccess = await fetch('/api/auth/login', {
+		const response = await fetch('http://localhost:3000/auth/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({ email, password })
-		}).then(res => res.json())
+		})
 
-		if (isSuccess) {
-			router.push('/dashboard')
+		if (!response.ok) {
+			console.log('Login failed')
+			return
 		}
+
+		const data = await response.json()
+
+		localStorage.setItem('access_token', data.access_token)
+		localStorage.setItem('refresh_token', data.refresh_token)
+
+		router.push('/kanban-board')
 	}
 
 	return {
