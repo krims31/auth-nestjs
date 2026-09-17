@@ -3,6 +3,7 @@
 import ButtonRegister from '../../../components/ui/buttonRegister'
 import InputEmail from '../../../shared/ui/input-email/inputEmail'
 import InputPassword from '../../../shared/ui/input-password/inputPassword'
+import InputUsername from '../../../shared/ui/input-username/inputUsername'
 import useAuthRegister from '../model/useAuthRegister'
 
 export default function RegisterForm() {
@@ -25,6 +26,10 @@ export default function RegisterForm() {
 						</h1>
 					</section>
 					<form onSubmit={handleSubmitRegister}>
+						<InputUsername
+							value={username}
+							onChange={setUsername}
+						/>
 						<InputEmail
 							value={email}
 							onChange={setEmail}
