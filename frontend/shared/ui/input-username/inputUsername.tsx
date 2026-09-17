@@ -1,8 +1,12 @@
 import { Field, FieldLabel } from '../../../components/ui/field'
 import { Input } from '../../../components/ui/input'
-import { InputUsernameProps } from '../../../features/auth-by-email/model/interfaces/InputUsernameProps'
+import { UseFormRegisterReturn } from 'react-hook-form'
 
-export default function InputUsername({ value, onChange }: InputUsernameProps) {
+export default function InputUsername({
+	registration
+}: {
+	registration: UseFormRegisterReturn
+}) {
 	return (
 		<Field>
 			<FieldLabel
@@ -13,10 +17,9 @@ export default function InputUsername({ value, onChange }: InputUsernameProps) {
 			</FieldLabel>
 			<Input
 				id="username"
-				value={value}
-				onChange={e => onChange(e.target.value)}
 				type="text"
 				placeholder="Username"
+				{...registration}
 				className="relative top-20 left-10 font-mono w-85!"
 			/>
 		</Field>

@@ -7,15 +7,7 @@ import InputUsername from '../../../shared/ui/input-username/inputUsername'
 import useAuthRegister from '../model/useAuthRegister'
 
 export default function RegisterForm() {
-	const {
-		email,
-		setEmail,
-		password,
-		setPassword,
-		handleSubmitRegister,
-		username,
-		setUsername
-	} = useAuthRegister()
+	const { register, handleSubmit } = useAuthRegister()
 	return (
 		<>
 			<div className="flex items-center justify-center h-200">
@@ -25,19 +17,10 @@ export default function RegisterForm() {
 							Sign Up
 						</h1>
 					</section>
-					<form onSubmit={handleSubmitRegister}>
-						<InputUsername
-							value={username}
-							onChange={setUsername}
-						/>
-						<InputEmail
-							value={email}
-							onChange={setEmail}
-						/>
-						<InputPassword
-							value={password}
-							onChange={setPassword}
-						/>
+					<form onSubmit={handleSubmit}>
+						<InputUsername registration={register('username')} />
+						<InputEmail registration={register('email')} />
+						<InputPassword registration={register('password')} />
 						<ButtonRegister />
 					</form>
 				</div>

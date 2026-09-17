@@ -1,10 +1,14 @@
 import { Eye, EyeOff } from 'lucide-react'
 import { Field, FieldLabel } from '../../../components/ui/field'
 import { Input } from '../../../components/ui/input'
-import { InputPasswordProps } from '../../../features/auth-by-email/model/interfaces/InputPasswordProps'
 import { useAuthLogin } from '../../../features/auth-by-email/model/useAuthLogin'
+import {UseFormRegisterReturn} from 'react-hook-form'
 
-export default function InputPassword({ value, onChange }: InputPasswordProps) {
+export default function InputPassword({
+	registration
+}: {
+	registration: UseFormRegisterReturn
+}) {
 	const { visible, setVisible } = useAuthLogin()
 	return (
 		<Field>
@@ -15,8 +19,6 @@ export default function InputPassword({ value, onChange }: InputPasswordProps) {
 				Password
 			</FieldLabel>
 			<Input
-				value={value}
-				onChange={e => onChange(e.target.value)}
 				type={visible ? 'text' : 'password'}
 				placeholder="Password"
 				className="relative top-25 left-10 font-mono w-85!"

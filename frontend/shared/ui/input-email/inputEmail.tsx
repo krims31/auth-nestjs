@@ -1,9 +1,13 @@
 import { Mail } from 'lucide-react'
+import { UseFormRegisterReturn } from 'react-hook-form'
 import { Field, FieldLabel } from '../../../components/ui/field'
 import { Input } from '../../../components/ui/input'
-import { InputEmailProps } from '../../../features/auth-by-email/model/interfaces/InputEmailProps'
 
-export default function InputEmail({ value, onChange }: InputEmailProps) {
+export default function InputEmail({
+	registration
+}: {
+	registration: UseFormRegisterReturn
+}) {
 	return (
 		<Field>
 			<FieldLabel
@@ -13,10 +17,9 @@ export default function InputEmail({ value, onChange }: InputEmailProps) {
 				Email
 			</FieldLabel>
 			<Input
-				value={value}
-				onChange={e => onChange(e.target.value)}
 				type="email"
 				placeholder="Email"
+				{...registration}
 				className="relative top-25 left-10 font-mono w-85!"
 			/>
 			<button>
