@@ -1,8 +1,8 @@
 import { Eye, EyeOff } from 'lucide-react'
+import { UseFormRegisterReturn } from 'react-hook-form'
 import { Field, FieldLabel } from '../../../components/ui/field'
 import { Input } from '../../../components/ui/input'
 import { useAuthLogin } from '../../../features/auth-by-email/model/useAuthLogin'
-import {UseFormRegisterReturn} from 'react-hook-form'
 
 export default function InputPassword({
 	registration
@@ -21,6 +21,7 @@ export default function InputPassword({
 			<Input
 				type={visible ? 'text' : 'password'}
 				placeholder="Password"
+				{...registration}
 				className="relative top-25 left-10 font-mono w-85!"
 			/>
 			<button
