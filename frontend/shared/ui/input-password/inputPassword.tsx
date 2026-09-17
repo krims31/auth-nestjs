@@ -1,15 +1,15 @@
 import { Eye, EyeOff } from 'lucide-react'
+import { useState } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 import { Field, FieldLabel } from '../../../components/ui/field'
 import { Input } from '../../../components/ui/input'
-import { useAuthLogin } from '../../../features/auth-by-email/model/useAuthLogin'
 
 export default function InputPassword({
 	registration
 }: {
 	registration: UseFormRegisterReturn
 }) {
-	const { visible, setVisible } = useAuthLogin()
+	const [visible, setVisible] = useState(false)
 	return (
 		<Field>
 			<FieldLabel
