@@ -1,8 +1,9 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { LoginFromValues } from './type/LoginFromValues'
+import { LoginFormValues, loginSchema } from './login.schema'
 
 export const useAuthLogin = () => {
 	const router = useRouter()
@@ -10,9 +11,11 @@ export const useAuthLogin = () => {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<LoginFromValues>()
+	} = useForm<LoginFormValues>({
+		resolver: zodResolver(loginSchema)
+	})
 
-	const onSubmit = async (data: LoginFromValues) => {
+	const onSubmit = async (data: LoginFormValues) => {
 		const response = await fetch('http://localhost:3000/auth/login', {
 			method: 'POST',
 			headers: {
