@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { RegisterFromValues } from './type/RegisterFromValues'
+import { LoginFromValues } from './type/LoginFromValues'
 
 export const useAuthLogin = () => {
 	const router = useRouter()
@@ -10,9 +10,9 @@ export const useAuthLogin = () => {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<RegisterFromValues>()
+	} = useForm<LoginFromValues>()
 
-	const onSubmit = async (data: RegisterFromValues) => {
+	const onSubmit = async (data: LoginFromValues) => {
 		const response = await fetch('http://localhost:3000/auth/login', {
 			method: 'POST',
 			headers: {
