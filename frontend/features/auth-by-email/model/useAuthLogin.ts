@@ -29,8 +29,10 @@ export const useAuthLogin = () => {
 			return
 		}
 
-		localStorage.setItem('access_token', data.access_token)
-		localStorage.setItem('refresh_token', data.refresh_token)
+		const result = await response.json()
+
+		localStorage.setItem('access_token', result.access_token)
+		localStorage.setItem('refresh_token', result.refresh_token)
 
 		router.push('/kanban-board')
 	}

@@ -1,6 +1,7 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { RegisterFromValues } from './type/RegisterFromValues'
+import { RegisterFormValues, registerSchema } from './register.schema'
 
 export default function useAuthRegister() {
 	const router = useRouter()
@@ -8,9 +9,11 @@ export default function useAuthRegister() {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<RegisterFromValues>()
+	} = useForm<RegisterFormValues>({
+		resolver: zodResolver(registerSchema)
+	})
 
-	const onSubmit = async (data: RegisterFromValues) => {
+	const onSubmit = async (data: RegisterFormValues) => {
 		const response = await fetch('http://localhost:3000/auth/register', {
 			method: 'POST',
 			headers: {
@@ -24,8 +27,10 @@ export default function useAuthRegister() {
 			return
 		}
 
-		localStorage.setItem('access_token', data.access_token)
-		localStorage.setItem('refresh_token', data.refresh_token)
+		const result = await response.json()
+
+		localStorage.setItem('access_token', result.access_token)
+		localStorage.setItem('refresh_token', result.refresh_token)
 
 		router.push('/auth/login')
 	}
