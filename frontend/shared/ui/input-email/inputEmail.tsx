@@ -15,7 +15,7 @@ export default function InputEmail({
 			<Field>
 				<FieldLabel
 					htmlFor="email"
-					className="relative top-25 left-10 text-[15px] font-mono"
+					className="relative top-20 left-10 text-[15px] font-mono"
 				>
 					Email
 				</FieldLabel>
@@ -23,7 +23,7 @@ export default function InputEmail({
 					type="email"
 					placeholder="Email"
 					{...registration}
-					className="relative top-25 left-10 font-mono w-85!"
+					className="relative top-20 left-10 font-mono w-85!"
 				/>
 				{error && (
 					<span className="text-red-500 text-sm font-mono flex items-center gap-1">
@@ -34,7 +34,7 @@ export default function InputEmail({
 				<button>
 					<Mail
 						size={20}
-						className="relative top-16.5 left-87"
+						className="relative top-11.5 left-87"
 					/>
 				</button>
 			</Field>
