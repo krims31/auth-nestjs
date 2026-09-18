@@ -10,7 +10,7 @@ export default function LoginForm() {
 	const { register, handleSubmit, errors } = useAuthLogin()
 	return (
 		<>
-			<div className="flex items-center justify-center h-200">
+			<div className="flex items-center justify-center min-h-screen">
 				<div className="border rounded-2xl w-100 h-120">
 					<section>
 						<h1 className="text-center relative top-10 text-2xl font-mono">
