@@ -1,4 +1,4 @@
-import { Eye, EyeOff } from 'lucide-react'
+import { AlertCircle, Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 import { Field, FieldLabel } from '../../../components/ui/field'
@@ -26,7 +26,12 @@ export default function InputPassword({
 				{...registration}
 				className="relative top-25 left-10 font-mono w-85!"
 			/>
-			{error && <span className="text-red-500 text-sm">{error}</span>}
+			{error && (
+				<span className="text-red-500 text-sm font-mono flex items-center gap-1">
+					<AlertCircle size={14} />
+					{error}
+				</span>
+			)}
 			<button
 				type="button"
 				onClick={() => setVisible(!visible)}
