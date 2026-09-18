@@ -7,7 +7,7 @@ import InputUsername from '../../../shared/ui/input-username/inputUsername'
 import useAuthRegister from '../model/useAuthRegister'
 
 export default function RegisterForm() {
-	const { register, handleSubmit } = useAuthRegister()
+	const { register, handleSubmit, errors } = useAuthRegister()
 	return (
 		<>
 			<div className="flex items-center justify-center h-200">
@@ -18,9 +18,18 @@ export default function RegisterForm() {
 						</h1>
 					</section>
 					<form onSubmit={handleSubmit}>
-						<InputUsername registration={register('username')} />
-						<InputEmail registration={register('email')} />
-						<InputPassword registration={register('password')} />
+						<InputUsername
+							registration={register('username')}
+							error={errors.username?.message}
+						/>
+						<InputEmail
+							registration={register('email')}
+							error={errors.email?.message}
+						/>
+						<InputPassword
+							registration={register('password')}
+							error={errors.password?.message}
+						/>
 						<ButtonRegister />
 					</form>
 				</div>
