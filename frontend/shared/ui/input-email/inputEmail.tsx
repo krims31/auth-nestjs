@@ -4,9 +4,11 @@ import { Field, FieldLabel } from '../../../components/ui/field'
 import { Input } from '../../../components/ui/input'
 
 export default function InputEmail({
-	registration
+	registration,
+	error
 }: {
 	registration: UseFormRegisterReturn
+	error?: string
 }) {
 	return (
 		<Field>
@@ -22,6 +24,7 @@ export default function InputEmail({
 				{...registration}
 				className="relative top-25 left-10 font-mono w-85!"
 			/>
+			{error && <span className="text-red-500 text-sm">{error}</span>}
 			<button>
 				<Mail
 					size={20}

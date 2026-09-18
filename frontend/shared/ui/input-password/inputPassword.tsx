@@ -5,9 +5,11 @@ import { Field, FieldLabel } from '../../../components/ui/field'
 import { Input } from '../../../components/ui/input'
 
 export default function InputPassword({
-	registration
+	registration,
+	error
 }: {
 	registration: UseFormRegisterReturn
+	error?: string
 }) {
 	const [visible, setVisible] = useState(false)
 	return (
@@ -24,6 +26,7 @@ export default function InputPassword({
 				{...registration}
 				className="relative top-25 left-10 font-mono w-85!"
 			/>
+			{error && <span className="text-red-500 text-sm">{error}</span>}
 			<button
 				type="button"
 				onClick={() => setVisible(!visible)}

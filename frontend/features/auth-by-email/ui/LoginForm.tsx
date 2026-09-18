@@ -7,7 +7,7 @@ import InputPassword from '../../../shared/ui/input-password/inputPassword'
 import { useAuthLogin } from '../model/useAuthLogin'
 
 export default function LoginForm() {
-	const { register, handleSubmit } = useAuthLogin()
+	const { register, handleSubmit, errors } = useAuthLogin()
 	return (
 		<>
 			<div className="flex items-center justify-center h-200">
@@ -27,8 +27,14 @@ export default function LoginForm() {
 						</p>
 					</section>
 					<form onSubmit={handleSubmit}>
-						<InputEmail registration={register('email')} />
-						<InputPassword registration={register('password')} />
+						<InputEmail
+							registration={register('email')}
+							error={errors.email?.message}
+						/>
+						<InputPassword
+							registration={register('password')}
+							error={errors.password?.message}
+						/>
 						<Button />
 					</form>
 				</div>
