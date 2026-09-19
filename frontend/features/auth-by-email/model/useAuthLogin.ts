@@ -25,7 +25,8 @@ export const useAuthLogin = () => {
 		})
 
 		if (!response.ok) {
-			console.log('Login failed')
+			const errorData = await response.json().catch(() => null)
+			console.log('Login failed', response.status, errorData)
 			return
 		}
 
