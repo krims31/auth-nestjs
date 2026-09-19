@@ -15,6 +15,7 @@ export default function ProtectedRoute({
 
 	useEffect(() => {
 		const token = localStorage.getItem('access_token')
+		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setStatus(token ? 'authenticated' : 'unauthenticated')
 	}, [])
 
