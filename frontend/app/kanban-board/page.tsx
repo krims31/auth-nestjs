@@ -1,7 +1,11 @@
+import ProtectedRoute from '../../shared/ui/ProtectedRoute/ProtectedRoute'
+
 export default function KanbanBoard() {
 	return (
 		<>
-			<h1>Kanban Board</h1>
+			<ProtectedRoute>
+				<h1>Kanban Board</h1>
+			</ProtectedRoute>
 		</>
 	)
 }
