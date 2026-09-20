@@ -16,7 +16,7 @@ export default function useAuthRegister() {
 
 	const onSubmit = async (data: RegisterFormValues) => {
 		try {
-			const result = await ApiClient('/auth/register', {
+			await ApiClient('/auth/register', {
 				method: 'POST',
 				auth: false,
 				body: data
