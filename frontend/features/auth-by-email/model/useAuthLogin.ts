@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
+import ApiClient from '../../../shared/api/api-client'
 import { LoginFormValues, loginSchema } from './login.schema'
 
 export const useAuthLogin = () => {
@@ -16,26 +17,20 @@ export const useAuthLogin = () => {
 	})
 
 	const onSubmit = async (data: LoginFormValues) => {
-		const response = await fetch('http://localhost:3000/auth/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		})
+		try {
+			const result = await ApiClient('/auth/login', {
+				method: 'POST',
+				auth: false,
+				body: data
+			})
 
-		if (!response.ok) {
-			const errorData = await response.json().catch(() => null)
-			console.log('Login failed', response.status, errorData)
-			return
+			localStorage.setItem('access_token', result.access_token)
+			localStorage.setItem('refresh_token', result.refresh_token)
+
+			router.push('/kanban-board')
+		} catch (error) {
+			console.log(error)
 		}
-
-		const result = await response.json()
-
-		localStorage.setItem('access_token', result.access_token)
-		localStorage.setItem('refresh_token', result.refresh_token)
-
-		router.push('/kanban-board')
 	}
 
 	return {
