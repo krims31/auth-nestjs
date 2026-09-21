@@ -1,7 +1,7 @@
 import ApiClient from '../../../shared/api/api-client'
 import { Project } from '../types/ProjectFromValues'
 
-export async function getProject(): Promise<Project[]> {
+export async function getProjects(): Promise<Project[]> {
 	return ApiClient('/projects')
 }
 
