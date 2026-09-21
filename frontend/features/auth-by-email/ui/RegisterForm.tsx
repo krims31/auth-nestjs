@@ -1,5 +1,6 @@
 'use client'
 
+import { AlertCircle } from 'lucide-react'
 import ButtonRegister from '../../../components/ui/buttonRegister'
 import InputEmail from '../../../shared/ui/input-email/inputEmail'
 import InputPassword from '../../../shared/ui/input-password/inputPassword'
@@ -7,7 +8,7 @@ import InputUsername from '../../../shared/ui/input-username/inputUsername'
 import useAuthRegister from '../model/useAuthRegister'
 
 export default function RegisterForm() {
-	const { register, handleSubmit, errors } = useAuthRegister()
+	const { register, handleSubmit, errors, serverError } = useAuthRegister()
 	return (
 		<>
 			<div className="flex items-center justify-center h-200">
@@ -30,6 +31,12 @@ export default function RegisterForm() {
 							registration={register('password')}
 							error={errors.password?.message}
 						/>
+						{serverError && (
+							<span className="text-red-500 text-sm font-mono flex items-center gap-1">
+								<AlertCircle size={14} />
+								{serverError}
+							</span>
+						)}
 						<ButtonRegister />
 					</form>
 				</div>

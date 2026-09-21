@@ -5,9 +5,10 @@ import Button from '../../../components/ui/buttonLogin'
 import InputEmail from '../../../shared/ui/input-email/inputEmail'
 import InputPassword from '../../../shared/ui/input-password/inputPassword'
 import { useAuthLogin } from '../model/useAuthLogin'
+import { AlertCircle } from 'lucide-react'
 
 export default function LoginForm() {
-	const { register, handleSubmit, errors } = useAuthLogin()
+	const { register, handleSubmit, errors, serverError } = useAuthLogin()
 	return (
 		<>
 			<div className="flex items-center justify-center min-h-screen">
@@ -35,6 +36,12 @@ export default function LoginForm() {
 							registration={register('password')}
 							error={errors.password?.message}
 						/>
+						{serverError && (
+							<span className="text-red-500 text-sm font-mono flex items-center gap-1">
+								<AlertCircle size={14} />
+								{serverError}
+							</span>
+						)}
 						<Button />
 					</form>
 				</div>

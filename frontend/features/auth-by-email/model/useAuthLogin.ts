@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import ApiClient from '../../../shared/api/api-client'
 import { LoginFormValues, loginSchema } from './login.schema'
+import { useState } from 'react'
 
 export const useAuthLogin = () => {
 	const router = useRouter()
@@ -15,6 +16,8 @@ export const useAuthLogin = () => {
 	} = useForm<LoginFormValues>({
 		resolver: zodResolver(loginSchema)
 	})
+
+	const [serverError, setServerError] = useState<string | null>(null)
 
 	const onSubmit = async (data: LoginFormValues) => {
 		try {
@@ -29,13 +32,18 @@ export const useAuthLogin = () => {
 
 			router.push('/kanban-board')
 		} catch (error) {
-			console.log(error)
+			if (error instanceof Error) {
+				setServerError(error.message)
+			} else {
+				setServerError("Something went wrong")
+			}
 		}
 	}
 
 	return {
 		register,
 		handleSubmit: handleSubmit(onSubmit),
-		errors
+		errors,
+		serverError
 	}
 }
