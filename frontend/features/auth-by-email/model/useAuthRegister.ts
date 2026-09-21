@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import ApiClient from '../../../shared/api/api-client'
 import { RegisterFormValues, registerSchema } from './register.schema'
+import { useState } from 'react'
 
 export default function useAuthRegister() {
 	const router = useRouter()
@@ -14,6 +15,8 @@ export default function useAuthRegister() {
 		resolver: zodResolver(registerSchema)
 	})
 
+	const [serverError, setServerError] = useState<string | null>(null)
+
 	const onSubmit = async (data: RegisterFormValues) => {
 		try {
 			await ApiClient('/auth/register', {
@@ -24,7 +27,11 @@ export default function useAuthRegister() {
 
 			router.push('/auth/login')
 		} catch (error) {
-			console.log(error)
+			if (error instanceof Error) {
+				setServerError(error.message)
+			} else {
+				setServerError("Something went wrong")
+			}
 		}
 	}
 
