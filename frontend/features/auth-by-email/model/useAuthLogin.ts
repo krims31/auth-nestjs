@@ -19,6 +19,7 @@ export const useAuthLogin = () => {
 
 	const [serverError, setServerError] = useState<string | null>(null)
 
+	// login user and get token from server
 	const onSubmit = async (data: LoginFormValues) => {
 		try {
 			const result = await ApiClient('/auth/login', {

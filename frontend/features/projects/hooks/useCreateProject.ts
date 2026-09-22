@@ -17,6 +17,7 @@ export default function useCreateProject() {
 
 	const [serverError, setServerError] = useState<string | null>(null)
 
+	// create project
 	const onSubmit = async (data: ProjectFormValues) => {
 		try {
 			await ApiClient('/projects', {
