@@ -10,10 +10,14 @@ export default function CreateProjectForm() {
 			<form onSubmit={handleSubmit}>
 				<InputProject
 					registration={register('title')}
+					label="Title"
+					placeholder="Title"
 					error={errors.title?.message}
 				/>
 				<InputProject
 					registration={register('description')}
+					label="Description"
+					placeholder="Description"
 					error={errors.description?.message}
 				/>
 				{serverError && (
