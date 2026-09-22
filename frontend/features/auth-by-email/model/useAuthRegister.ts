@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import ApiClient from '../../../shared/api/api-client'
 import { RegisterFormValues, registerSchema } from './register.schema'
-import { useState } from 'react'
 
 export default function useAuthRegister() {
 	const router = useRouter()
@@ -35,5 +35,5 @@ export default function useAuthRegister() {
 		}
 	}
 
-	return { register, handleSubmit: handleSubmit(onSubmit), errors }
+	return { register, handleSubmit: handleSubmit(onSubmit), errors, serverError }
 }
