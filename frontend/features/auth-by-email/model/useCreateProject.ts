@@ -1,15 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import ApiClient from '../../../shared/api/api-client'
-import { projectSchema } from '../../projects/schema/project.schema'
-import { ProjectFormValues } from '../../projects/types/ProjectFromValues'
-
+import {
+	ProjectFormValues,
+	projectSchema
+} from '../../projects/schema/project.schema'
 export default function useCreateProject() {
-	const router = useRouter()
-
-	const { title, description, handleSubmit } = useForm<ProjectFormValues>({
+	const {
+		register,
+		handleSubmit,
+		formState: { errors }
+	} = useForm<ProjectFormValues>({
 		resolver: zodResolver(projectSchema)
 	})
 
@@ -19,7 +21,6 @@ export default function useCreateProject() {
 		try {
 			await ApiClient('/projects', {
 				method: 'POST',
-				auth: false,
 				body: data
 			})
 		} catch (error) {
@@ -32,8 +33,8 @@ export default function useCreateProject() {
 	}
 
 	return {
-		title,
-		description,
+		register,
+		errors,
 		handleSubmit: handleSubmit(onSubmit),
 		serverError
 	}
