@@ -5,7 +5,7 @@ import ApiClient from '../../../shared/api/api-client'
 import {
 	ProjectFormValues,
 	projectSchema
-} from '../../projects/schema/project.schema'
+} from '../schema/project.schema'
 export default function useCreateProject() {
 	const {
 		register,
