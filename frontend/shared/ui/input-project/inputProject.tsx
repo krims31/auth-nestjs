@@ -4,22 +4,27 @@ import { Input } from '../../../components/ui/input'
 
 export default function InputProject({
 	registration,
-	error
+	error,
+	label,
+	placeholder
 }: {
 	registration: UseFormRegisterReturn
 	error?: string
+	label: string
+	placeholder: string
 }) {
 	return (
 		<div className="flex flex-col gap-1 mb-4">
 			<Field>
-				<FieldLabel htmlFor="project">Project</FieldLabel>
+				<FieldLabel htmlFor={registration.name}>{label}</FieldLabel>
 			</Field>
 			<Input
-				id="project"
+				id={registration.name}
 				type="text"
-				placeholder="Project"
+				placeholder={placeholder}
 				{...registration}
 			/>
+
 			{error && <span className="text-red-500 text-sm">{error}</span>}
 		</div>
 	)
