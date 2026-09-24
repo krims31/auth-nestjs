@@ -13,10 +13,13 @@ export default function useCreateProject() {
 		resolver: zodResolver(projectSchema)
 	})
 
+	// Get query client
 	const queryClient = useQueryClient()
 
+	// Server error
 	const [serverError, setServerError] = useState<string | null>(null)
 
+	// Create mutation for create project
 	const mutation = useMutation({
 		mutationFn: createProject,
 		onSuccess: () => {
