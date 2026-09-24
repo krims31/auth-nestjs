@@ -1,11 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import ApiClient from '../../../shared/api/api-client'
-import {
-	ProjectFormValues,
-	projectSchema
-} from '../schema/project.schema'
+import { createProject } from '../api/projectApi'
+import { ProjectFormValues, projectSchema } from '../schema/project.schema'
 export default function useCreateProject() {
 	const {
 		register,
@@ -15,22 +13,28 @@ export default function useCreateProject() {
 		resolver: zodResolver(projectSchema)
 	})
 
+	const queryClient = useQueryClient()
+
 	const [serverError, setServerError] = useState<string | null>(null)
 
-	// create project
-	const onSubmit = async (data: ProjectFormValues) => {
-		try {
-			await ApiClient('/projects', {
-				method: 'POST',
-				body: data
-			})
-		} catch (error) {
-			if (error instanceof Error) {
-				setServerError(error.message)
-			} else {
-				setServerError('Something went wrong')
-			}
+	const mutation = useMutation({
+		mutationFn: createProject,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['projects'] })
 		}
+	})
+
+	// create project
+	const onSubmit = (data: ProjectFormValues) => {
+		mutation.mutate(data, {
+			onError: error => {
+				if (error instanceof Error) {
+					setServerError(error.message)
+				} else {
+					setServerError('Something went wrong')
+				}
+			}
+		})
 	}
 
 	return {
