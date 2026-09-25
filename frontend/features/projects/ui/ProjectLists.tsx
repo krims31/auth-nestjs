@@ -5,7 +5,7 @@ export default function ProjectLists() {
 
 	// Pending loading.
 	if (isPending) {
-		return <div>Loading...</div>
+		return <span>Loading...</span>
 	}
 
 	// Check error message and return error message.
