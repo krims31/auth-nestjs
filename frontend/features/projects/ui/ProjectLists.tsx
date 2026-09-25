@@ -6,7 +6,7 @@ export default function ProjectLists() {
 
 	// Pending loading.
 	if (isPending) {
-		return <span>Loading...</span>
+		return <span className="text-2xl flex items-center h-screen">Loading...</span>
 	}
 
 	// Check error message and return error message.
