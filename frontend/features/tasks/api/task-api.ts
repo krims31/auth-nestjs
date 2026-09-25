@@ -1,5 +1,6 @@
 import ApiClient from '../../../shared/api/api-client'
-export async function getTasks(projectId: string) {
+import { Task } from '../types/task'
+export async function getTasks(projectId: string): Promise<Task[]> {
 	return ApiClient(`/projects/${projectId}/tasks`)
 }
 
