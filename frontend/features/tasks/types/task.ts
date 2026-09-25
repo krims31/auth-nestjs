@@ -1,7 +1,7 @@
 export type Task = {
-	id: number,
-	title: string,
-	status: string,
-	projectId: number
+	id: string
+	title: string
+	status: string
+	projectId: string
 	createdAt: string
 }
