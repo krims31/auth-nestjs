@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import useProject from '../hooks/useProject'
 
 export default function ProjectLists() {
@@ -16,12 +17,14 @@ export default function ProjectLists() {
 	// Return lists of projects.
 	return (
 		<div>
-			{project?.map(project => (
-				<div key={project.id}>
-					<h3>{project.title}</h3>
-					<p>{project.description}</p>
-				</div>
-			))}
+			<Link href="/projects/${project.id}">
+				{project?.map(project => (
+					<div key={project.id}>
+						<h3>{project.title}</h3>
+						<p>{project.description}</p>
+					</div>
+				))}
+			</Link>
 		</div>
 	)
 }
