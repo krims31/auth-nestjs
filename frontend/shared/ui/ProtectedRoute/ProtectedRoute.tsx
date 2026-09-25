@@ -26,7 +26,7 @@ export default function ProtectedRoute({
 	}, [status, router])
 
 	if (status !== 'authenticated') {
-		return <div>Loading...</div>
+		return <div className="text-2xl flex items-center h-screen">Loading...</div>
 	}
 	return <>{children}</>
 }
