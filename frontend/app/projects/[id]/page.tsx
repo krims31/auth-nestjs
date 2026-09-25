@@ -1,3 +1,5 @@
+'use client'
+
 import { useParams } from 'next/navigation'
 import useTask from '../../../features/tasks/hooks/useTask'
 
@@ -7,7 +9,9 @@ export default function ProjectId() {
 	const { tasks, isPending, error } = useTask(params.id as string)
 
 	if (isPending) {
-		return <span>Loading...</span>
+		return (
+			<span className="text-2xl flex items-center h-screen">Loading...</span>
+		)
 	}
 
 	if (error instanceof Error) {
