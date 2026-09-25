@@ -17,14 +17,15 @@ export default function ProjectLists() {
 	// Return lists of projects.
 	return (
 		<div>
-			<Link href="/projects/${project.id}">
-				{project?.map(project => (
-					<div key={project.id}>
-						<h3>{project.title}</h3>
-						<p>{project.description}</p>
-					</div>
-				))}
-			</Link>
+			{project?.map(project => (
+				<Link
+					href={`/projects/${project.id}`}
+					key={project.id}
+				>
+					<h3>{project.title}</h3>
+					<p>{project.description}</p>
+				</Link>
+			))}
 		</div>
 	)
 }
