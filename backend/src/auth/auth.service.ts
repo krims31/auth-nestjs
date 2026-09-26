@@ -12,12 +12,12 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  // Регистрация пользователя
+  // Register user
   async register(dto: CreateDto) {
     return await this.usersService.create(dto);
   }
 
-  // Обновление токена
+  // Update token
   async refreshToken(refreshToken: string) {
     try {
       const payload = this.jwtService.verify<{ sub: string }>(refreshToken, {
@@ -55,18 +55,18 @@ export class AuthService {
     }
   }
 
-  // Логин пользователя
+  // Login user
   async login(dto: LoginDto) {
     const user = await this.usersService.findByEmail(dto.email);
 
-    // Проверка пользователя что он существует или нет
+    // Checking if a user, exists or not.
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
     const isPassword = await bcrypt.compare(dto.password, user.passwordHash);
 
-    // Проверка пароля что он существует или нет
+    // Checking if a password, exists or not.
     if (!isPassword) {
       throw new UnauthorizedException('Invalid credentials');
     }
