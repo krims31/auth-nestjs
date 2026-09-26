@@ -1,3 +1,5 @@
+"use client"
+
 import { useParams } from "next/navigation"
 import useTask from "../../../features/tasks/hooks/useTask"
 import CreateTaskForm from "../../../features/tasks/ui/CreateTaskForm"
