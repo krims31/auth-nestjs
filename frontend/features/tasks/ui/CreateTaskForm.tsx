@@ -1,9 +1,8 @@
 import { AlertCircle } from 'lucide-react'
 import InputProject from '../../../shared/ui/input-project/inputProject'
-import useCreateProject from '../../projects/hooks/useCreateProject'
 import useCreateTask from '../hooks/useCreateTask'
 
-export default function CreateProjectForm({projectId}: {projectId: string}) {
+export default function CreateTaskForm({projectId}: {projectId: string}) {
 	const { register, errors, serverError, handleSubmit } = useCreateTask(projectId)
 
 	return (
