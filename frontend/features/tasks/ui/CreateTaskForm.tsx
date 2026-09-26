@@ -21,7 +21,7 @@ export default function CreateTaskForm({projectId}: {projectId: string}) {
 					</span>
 				)}
 				<button type="submit">
-					<span className="text-sm font-mono">Submit</span>
+					<span className="text-sm font-mono border rounded-2xl p-2 bg-black text-white outline-none">Submit</span>
 				</button>
 			</form>
 		</>
