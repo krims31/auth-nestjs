@@ -26,6 +26,7 @@ export default function useCreateTask(projectId: string) {
   })
 
   const onSubmit = (data: TaskFormValues) => {
+    console.log("onSubmit called", data)
     mutation.mutate(data, {
       onError: error => {
         if (error instanceof Error) {

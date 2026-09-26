@@ -7,7 +7,7 @@ export default function CreateTaskForm({projectId}: {projectId: string}) {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
 				<InputProject
 					registration={register('title')}
 					label="Title"
