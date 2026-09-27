@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation"
 import useTask from "../../../features/tasks/hooks/useTask"
 import CreateTaskForm from "../../../features/tasks/ui/CreateTaskForm"
+import TaskItem from "../../../features/tasks/ui/TaskItem"
 
 export default function ProjectId() {
   const params = useParams()
@@ -18,12 +19,11 @@ export default function ProjectId() {
       {isPending && <span>Loading...</span>}
       {error instanceof Error && <span>{error.message}</span>}
 
-      {tasks?.map(task => (
-        <li key={task.id}>
-          <p>{task.title}</p>
-          <p>{task.status}</p>
-        </li>
-      ))}
+      <ul className="flex flex-col gap-3 mt-4">
+            {tasks?.map(task => (
+            <TaskItem key={task.id} task={task} projectId={projectId} />
+          ))}
+      </ul>
     </>
   )
 }
