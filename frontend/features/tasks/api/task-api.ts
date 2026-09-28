@@ -1,5 +1,5 @@
 import ApiClient from '../../../shared/api/api-client'
-import { Task } from '../types/TaskType'
+import { Task, TaskStatus } from '../types/TaskType'
 export async function getTasks(projectId: string): Promise<Task[]> {
 	return ApiClient(`/projects/${projectId}/tasks`)
 }
@@ -14,7 +14,7 @@ export async function createTasks(projectId: string, data: { title: string }) {
 export async function updateTasks(
 	projectId: string,
 	taskId: string,
-	status: Task
+	status: TaskStatus
 ) {
 	return ApiClient(`/projects/${projectId}/tasks/${taskId}`, {
 		method: 'PATCH',
