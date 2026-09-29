@@ -19,7 +19,7 @@ export default async function ApiClient<T>(
 	const response = await fetch('http://localhost:3000' + endpoint, {
 		method: options?.method || 'GET',
 		headers,
-		body: JSON.stringify(options?.body)
+		body: JSON.stringify(options?.body ? JSON.stringify(options.body) : undefined)
 	})
 
 	if (!response.ok) {
