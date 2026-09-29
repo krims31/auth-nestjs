@@ -10,11 +10,7 @@ export default function ProjectId() {
   const params = useParams()
   const projectId = params.id as string
 
-  const { tasks, isPending, error } = useTask(projectId)
-
-  const todoTasks = tasks?.filter(task => task.status === 'TODO')
-  const inProgressTasks = tasks?.filter(task => task.status === 'IN_PROGRESS')
-  const doneTasks = tasks?.filter(task => task.status === 'DONE')
+  const { isPending, error, todoTasks, inProgressTasks, doneTasks } = useTask(projectId)
 
   return (
     <>
