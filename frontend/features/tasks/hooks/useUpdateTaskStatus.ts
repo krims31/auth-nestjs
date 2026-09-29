@@ -21,7 +21,7 @@ export default function useUpdateTaskStatus(projectId: string) {
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['tasks', projectId] })
 		}
-	})
+  })
 
 	const updateStatus = (taskId: string, status: TaskStatus) => {
 		mutation.mutate(
