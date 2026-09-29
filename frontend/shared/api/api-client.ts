@@ -1,12 +1,12 @@
-export default async function ApiClient(
-	endpoint: string,
+export default async function ApiClient<T>(
+  endpoint: string,
 	options?: { method?: string; body?: Record<string, unknown>; auth?: boolean }
-) {
+): Promise<T> {
 	const headers: Record<string, string> = {
 		'Content-Type': 'application/json'
-	}
+  }
 
-	const auth = options?.auth
+  const auth = options?.auth
 
 	if (auth !== false) {
 		const token = localStorage.getItem('access_token')
