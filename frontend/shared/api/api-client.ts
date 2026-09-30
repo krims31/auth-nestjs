@@ -17,6 +17,7 @@ export default async function ApiClient<T>(
 		}
 	}
 
+	// make the request
 	const response = await fetch('http://localhost:3000' + endpoint, {
 		method: options?.method || 'GET',
 		headers,
