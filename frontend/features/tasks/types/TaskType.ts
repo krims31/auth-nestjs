@@ -6,6 +6,6 @@ export type Task = {
 	createdAt: string
 }
 
-export const TASK_STATUSES = ['TODO', 'IN_PROGRESS', 'DONE'] as const
+export const taskStatuses = ['TODO', 'IN_PROGRESS', 'DONE'] as const
 
-export type TaskStatus = (typeof TASK_STATUSES)[number]
+export type TaskStatus = (typeof taskStatuses)[number]
