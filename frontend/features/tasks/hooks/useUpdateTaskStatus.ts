@@ -23,6 +23,7 @@ export default function useUpdateTaskStatus(projectId: string) {
 		}
   })
 
+	// Update Status for tasks
 	const updateStatus = (taskId: string, status: TaskStatus) => {
 		mutation.mutate(
 			{ taskId, status },
