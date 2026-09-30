@@ -1,7 +1,7 @@
 import { AlertCircle } from 'lucide-react'
 import useUpdateTaskStatus from '../hooks/useUpdateTaskStatus'
 import { TaskItemProps } from '../interfaces/TaskItemProps'
-import { TASK_STATUSES, TaskStatus } from '../types/TaskType'
+import { taskStatuses, TaskStatus } from '../types/TaskType'
 
 export default function TaskItem({ task, projectId }: TaskItemProps) {
 	const { updateStatus, serverError } = useUpdateTaskStatus(projectId)
@@ -16,9 +16,9 @@ export default function TaskItem({ task, projectId }: TaskItemProps) {
 					onChange={e => updateStatus(task.id, e.target.value as TaskStatus)}
 					className="border rounded px-2 py-1 bg-white text-sm outline-none cursor-pointer"
 				>
-					<option value={TASK_STATUSES[0]}>To Do</option>
-					<option value={TASK_STATUSES[1]}>In Progress</option>
-					<option value={TASK_STATUSES[2]}>Done</option>
+					<option value={taskStatuses[0]}>To Do</option>
+					<option value={taskStatuses[1]}>In Progress</option>
+					<option value={taskStatuses[2]}>Done</option>
 				</select>
 			</div>
 
