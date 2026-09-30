@@ -17,7 +17,9 @@ export default function ProjectId() {
       <h1>{projectId}</h1>
       <CreateTaskForm projectId={projectId}></CreateTaskForm>
 
+
       {isPending && <span>Loading...</span>}
+
       {error instanceof Error && <span>{error.message}</span>}
 
       {!isPending && !error && (
