@@ -8,6 +8,7 @@ export default async function ApiClient<T>(
 
   const auth = options?.auth
 
+  // if auth not false, add authorization header
 	if (auth !== false) {
 		const token = localStorage.getItem('access_token')
 
