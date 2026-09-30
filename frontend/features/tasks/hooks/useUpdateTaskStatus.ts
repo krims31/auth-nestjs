@@ -6,6 +6,18 @@ import { TaskStatus } from '../types/TaskType'
 export default function useUpdateTaskStatus(projectId: string) {
 	const queryClient = useQueryClient()
 
+	const [isDelete, setIsDelete] = useState<boolean>(false)
+
+	// Delete task
+	const deleteTask = () => {
+		if (isDelete) {
+			setIsDelete(false)
+		} else {
+			setIsDelete(true)
+		}
+	}
+
+	
 	const [serverError, setServerError] = useState<string | null>(null)
 
 	const mutation = useMutation({
@@ -42,6 +54,7 @@ export default function useUpdateTaskStatus(projectId: string) {
 
 	return {
 		updateStatus,
+		deleteTask,
 		serverError
 	}
 }
