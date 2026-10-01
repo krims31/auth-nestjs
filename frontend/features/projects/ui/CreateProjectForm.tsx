@@ -27,7 +27,7 @@ export default function CreateProjectForm() {
 					</span>
 				)}
 				<button type="submit">
-					<span className="text-sm font-mono">Submit</span>
+					<span className="text-sm font-mono tracking-wide border border-zinc-800 bg-zinc-950 text-zinc-100 px-5 py-2 rounded-lg transition-all duration-300 ease-out hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 relative left-32">Submit</span>
 				</button>
 			</form>
 		</>
