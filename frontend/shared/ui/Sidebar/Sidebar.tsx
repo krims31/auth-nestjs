@@ -14,9 +14,9 @@ import { Home, Settings, User } from "lucide-react"
 import Link from "next/link"
 
 const items = [
-  { title: "Главная", url: "/", icon: Home },
-  { title: "Профиль", url: "/profile", icon: User },
-  { title: "Настройки", url: "/settings", icon: Settings },
+  { title: "Home", url: "/", icon: Home },
+  { title: "Inbox", url: "/profile", icon: User },
+  { title: "Settings", url: "/settings", icon: Settings },
 ]
 
 export function AppSidebar() {
