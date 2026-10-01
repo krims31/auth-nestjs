@@ -4,6 +4,7 @@ import { useParams } from "next/navigation"
 import useTask from "../../../features/tasks/hooks/useTask"
 import CreateTaskForm from "../../../features/tasks/ui/CreateTaskForm"
 import TaskColumn from "../../../features/tasks/ui/TaskColumn"
+import CreateProjectForm from "../../../features/projects/ui/CreateProjectForm"
 
 
 export default function ProjectId() {
@@ -16,6 +17,8 @@ export default function ProjectId() {
     <>
       <h1>{projectId}</h1>
       <CreateTaskForm projectId={projectId}></CreateTaskForm>
+
+      <CreateProjectForm />
 
 
       {isPending && <span>Loading...</span>}
