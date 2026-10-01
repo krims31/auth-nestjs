@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Ellipsis, Home, Settings, Mail, CircleQuestionMark } from "lucide-react"
+import { Ellipsis, Home, Settings, Mail, CircleQuestionMark, Plus } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import useProject from "../../../features/projects/hooks/useProject"
@@ -79,15 +79,15 @@ export function AppSidebar() {
                     <CreateProjectForm />
                   </DialogContent>
                 </Dialog>
-                <ul>
+                <ul className="flex flex-col gap-2 relative top-22">
                     {project?.map(project => (
                       <li key={project.id}>
                         <Link href={`/projects/${project.id}`}>{project.title}</Link>
                       </li>
                     ))}
-                    <li>
-                      <button onClick={() => setIsOpen(true)}>
-                        + New Project
+                    <li className="relative bottom-43 left-50">
+                      <button onClick={() => setIsOpen(true)} className="border rounded-sm transition duration-300 hover:bg-slate-100">
+                        <Plus className="text-slate-500" />
                       </button>
                     </li>
                   </ul>
