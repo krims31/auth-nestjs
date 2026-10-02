@@ -1,6 +1,7 @@
 'use client'
 
-import Header from '../../../frontend/shared/ui/Header/Header'
+import Header from "../../shared/ui/Header/Header"
+
 
 export default function KanbanBoard() {
 	return (
