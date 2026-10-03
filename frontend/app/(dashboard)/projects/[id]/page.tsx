@@ -1,10 +1,10 @@
 "use client"
 
 import { useParams } from "next/navigation"
-import useTask from "../../../features/tasks/hooks/useTask"
-import CreateTaskForm from "../../../features/tasks/ui/CreateTaskForm"
-import TaskColumn from "../../../features/tasks/ui/TaskColumn"
-import CreateProjectForm from "../../../features/projects/ui/CreateProjectForm"
+import useTask from "../../../../features/tasks/hooks/useTask"
+import CreateTaskForm from "../../../../features/tasks/ui/CreateTaskForm"
+import TaskColumn from "../../../../features/tasks/ui/TaskColumn"
+import CreateProjectForm from "../../../../features/projects/ui/CreateProjectForm"
 
 
 export default function ProjectId() {

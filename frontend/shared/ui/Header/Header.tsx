@@ -1,9 +1,10 @@
+import { usePathname } from "next/navigation"
+
 export default function Header() {
+  const pathname = usePathname()
   return (
     <>
-      <header>
-
-      </header>
+      <h1>{pathname}</h1>
     </>
   )
 }
