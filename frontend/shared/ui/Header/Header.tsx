@@ -19,7 +19,7 @@ export default function Header() {
   // Find the current project from the project data
   const currentProject = projects?.find(project => project.id === currentProjectId)
 
-  // Generate the breadcrumb based on the current path and project data
+  // Generate the breadcrumb text based on the current path and project data
   const breadcrumb = isProject && currentProject
       ? `Projects / ${currentProject.title}`
       : 'Projects'
