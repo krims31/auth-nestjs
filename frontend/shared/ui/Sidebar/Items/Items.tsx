@@ -8,6 +8,7 @@ import Link from 'next/link'
 
 import {Home, Mail} from 'lucide-react'
 
+// Items for the sidebar menu
 const items = [
   { title: "Home", url: "/", icon: Home },
   { title: "Inbox", url: "/", icon: Mail },
