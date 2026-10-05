@@ -1,7 +1,8 @@
 'use client'
 
-import { useParams, usePathname } from "next/navigation"
-import useProject from "../../../features/projects/hooks/useProject"
+import { Bell, Share2, Star } from 'lucide-react'
+import { useParams, usePathname } from 'next/navigation'
+import useProject from '../../../features/projects/hooks/useProject'
 
 export default function Header() {
   const pathname = usePathname()
@@ -17,16 +18,33 @@ export default function Header() {
   const currentProjectId = params.id as string | undefined
 
   // Find the current project from the project data
-  const currentProject = projects?.find(project => project.id === currentProjectId)
+  const currentProject = projects?.find(
+    project => project.id === currentProjectId
+  )
 
   // Generate the breadcrumb text based on the current path and project data
-  const breadcrumb = isProject && currentProject
+  const breadcrumb =
+    isProject && currentProject
       ? `Projects / ${currentProject.title}`
       : 'Projects'
 
-    return (
-      <div className="flex items-center justify-between p-4 border-b relative bottom-11 left-4">
-        <span className="text-lg text-gray-500">{breadcrumb}</span>
-      </div>
-    )
+  return (
+    <>
+      <header className="flex items-center justify-between p-4 relative bottom-11 left-4 border-b">
+        {/* Left part: Breadcrumb */}
+        <div className="flex items-center">
+          <span className="text-lg text-gray-500 font-medium ml-5">
+            {breadcrumb}
+          </span>
+        </div>
+
+        {/* Right part: Icons */}
+        <div className="flex items-center gap-4">
+          <Star className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+          <Share2 className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+          <Bell className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+        </div>
+      </header>
+    </>
+  )
 }
