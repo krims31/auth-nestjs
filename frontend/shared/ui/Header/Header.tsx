@@ -16,11 +16,11 @@ export default function Header() {
   const isProject = pathname.startsWith('/projects')
 
   // Get the current project ID from the URL params
-  const currentProjectId = params.id as string | undefined
+  const projectId = params.id as string | undefined
 
   // Find the current project from the project data
   const currentProject = projects?.find(
-    project => project.id === currentProjectId
+    project => project.id === projectId
   )
 
   // Generate the breadcrumb text based on the current path and project data
@@ -55,6 +55,11 @@ export default function Header() {
           <DropDownMenuAvatar />
         </div>
       </header>
+      <main>
+        <div>
+          <h1>{currentProject?.title}</h1>
+        </div>
+      </main>
     </>
   )
 }
