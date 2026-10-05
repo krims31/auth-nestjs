@@ -1,24 +1,21 @@
-"use client"
+'use client'
 
-import { useParams } from "next/navigation"
-import useTask from "../../../../features/tasks/hooks/useTask"
-import CreateTaskForm from "../../../../features/tasks/ui/CreateTaskForm"
-import TaskColumn from "../../../../features/tasks/ui/TaskColumn"
-import CreateProjectForm from "../../../../features/projects/ui/CreateProjectForm"
-
+import { useParams } from 'next/navigation'
+import useTask from '../../../../features/tasks/hooks/useTask'
+import TaskColumn from '../../../../features/tasks/ui/TaskColumn'
 
 export default function ProjectId() {
   const params = useParams()
   const projectId = params.id as string
 
-  const { isPending, error, todoTasks, inProgressTasks, doneTasks } = useTask(projectId)
+  const { isPending, error, todoTasks, inProgressTasks, doneTasks } =
+    useTask(projectId)
 
   return (
     <>
-      <CreateTaskForm projectId={projectId}></CreateTaskForm>
+      {/* <CreateTaskForm projectId={projectId}></CreateTaskForm> */}
 
-      <CreateProjectForm />
-
+      {/* <CreateTaskForm /> */}
 
       {isPending && <span>Loading...</span>}
 
