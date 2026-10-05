@@ -1,5 +1,6 @@
 'use client'
 
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -33,6 +34,11 @@ export default function DropdownMenuAvatar() {
             size="icon"
             className="rounded-full"
           >
+            <Avatar>
+              <AvatarFallback className="bg-blue-600 text-white font-medium">
+                {initials}
+              </AvatarFallback>
+            </Avatar>
           </Button>
         }
       />
