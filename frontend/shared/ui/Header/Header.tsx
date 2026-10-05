@@ -3,6 +3,7 @@
 import { Bell, Share2, Star } from 'lucide-react'
 import { useParams, usePathname } from 'next/navigation'
 import useProject from '../../../features/projects/hooks/useProject'
+import DropDownMenuAvatar from '../DropDown/DropDownMenuAvatar'
 
 export default function Header() {
   const pathname = usePathname()
@@ -43,6 +44,7 @@ export default function Header() {
           <Star className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
           <Share2 className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
           <Bell className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
+          <DropDownMenuAvatar />
         </div>
       </header>
     </>
