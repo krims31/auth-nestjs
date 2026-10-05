@@ -15,7 +15,6 @@ export default function ProjectId() {
 
   return (
     <>
-      <h1>{projectId}</h1>
       <CreateTaskForm projectId={projectId}></CreateTaskForm>
 
       <CreateProjectForm />
