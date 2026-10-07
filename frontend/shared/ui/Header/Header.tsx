@@ -1,9 +1,14 @@
 'use client'
 
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Bell, Share2, Star } from 'lucide-react'
 import Image from 'next/image'
 import { useParams, usePathname } from 'next/navigation'
+import { useState } from 'react'
+import { Button } from '../../../components/ui/button'
+import { Input } from '../../../components/ui/input'
 import useProject from '../../../features/projects/hooks/useProject'
+import CreateTaskForm from '../../../features/tasks/ui/CreateTaskForm'
 import CalendarView from '../CalendarView/CalendarView'
 import DropDownMenuAvatar from '../DropDown/DropDownMenuAvatar'
 import KanbanView from '../KanbanView/KanbanView'
@@ -12,6 +17,8 @@ import ListView from '../ListView/ListView'
 export default function Header() {
   const pathname = usePathname()
   const params = useParams()
+
+  const [isTaskDialogOpen, setIsTaskDialogOpen] = useState<boolean>(false)
 
   // Project data;
   const { project: projects } = useProject()
@@ -52,25 +59,39 @@ export default function Header() {
           <DropDownMenuAvatar />
         </div>
       </header>
-      <main>
-        <div>
-          <Image
-            src='/logo.jpeg'
-            width={40}
-            height={40}
-            className='relative bottom-10 left-0'
-            alt='Picture of the author'
-          />
-          <div className='relative bottom-19 left-11'>
-            <h1 className='text-2xl'>{currentProject?.title}</h1>
+      <main className='px-1 pt-0'>
+        <div className='flex items-center gap-3 mb-2'>
+          <Image src='/logo.jpeg' width={40} height={40} className='rounded' alt='Project icon' />
+          <h1 className='text-2xl font-semibold'>{currentProject?.title}</h1>
+        </div>
+
+        <div className='flex items-center justify-between mb-2'>
+          <div className='flex gap-4'>
+            <KanbanView />
+            <ListView />
+            <CalendarView />
+          </div>
+
+          <div className='flex items-center gap-3'>
+            <Input placeholder='Search' className='w-64 mt-10' />
+            <Button variant='outline' className='mt-10'>
+              Filter
+            </Button>
+            <Button onClick={() => setIsTaskDialogOpen(true)} className='mt-10'>
+              Create Task
+            </Button>
+            <Dialog open={isTaskDialogOpen} onOpenChange={setIsTaskDialogOpen}>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>New Task</DialogTitle>
+                </DialogHeader>
+                <CreateTaskForm projectId={projectId as string} />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
-        <div className='flex gap-4 relative bottom-10'>
-          <KanbanView />
-          <ListView />
-          <CalendarView />
-        </div>
-        <div className='h-px w-full bg-gray-300 relative bottom-2'></div>
+
+        <div className='h-px w-full bg-gray-300 mt-3' />
       </main>
     </>
   )
