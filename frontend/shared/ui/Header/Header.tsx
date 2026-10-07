@@ -1,10 +1,12 @@
 'use client'
 
 import { Bell, Share2, Star } from 'lucide-react'
+import Image from 'next/image'
 import { useParams, usePathname } from 'next/navigation'
 import useProject from '../../../features/projects/hooks/useProject'
 import DropDownMenuAvatar from '../DropDown/DropDownMenuAvatar'
 import KanbanView from '../KanbanView/KanbanView'
+import ListView from '../ListView/ListView'
 
 export default function Header() {
   const pathname = usePathname()
@@ -51,10 +53,18 @@ export default function Header() {
       </header>
       <main>
         <div>
-          <h1>{currentProject?.title}</h1>
+          <Image
+            src='/logo.jpeg'
+            width={50}
+            height={50}
+            className='absolute top-2 left-3'
+            alt='Picture of the author'
+          />
+          <h1 className=''>{currentProject?.title}</h1>
         </div>
         <div>
           <KanbanView />
+          <ListView />
         </div>
       </main>
     </>
