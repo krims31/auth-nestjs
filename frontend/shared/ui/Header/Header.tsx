@@ -56,18 +56,21 @@ export default function Header() {
         <div>
           <Image
             src='/logo.jpeg'
-            width={50}
-            height={50}
-            className='absolute top-2 left-3'
+            width={40}
+            height={40}
+            className='relative bottom-10 left-0'
             alt='Picture of the author'
           />
-          <h1 className=''>{currentProject?.title}</h1>
+          <div className='relative bottom-19 left-11'>
+            <h1 className='text-2xl'>{currentProject?.title}</h1>
+          </div>
         </div>
-        <div>
+        <div className='flex gap-4 relative bottom-10'>
           <KanbanView />
           <ListView />
           <CalendarView />
         </div>
+        <div className='h-px w-full bg-gray-300 relative bottom-2'></div>
       </main>
     </>
   )
