@@ -4,6 +4,7 @@ import { Bell, Share2, Star } from 'lucide-react'
 import Image from 'next/image'
 import { useParams, usePathname } from 'next/navigation'
 import useProject from '../../../features/projects/hooks/useProject'
+import CalendarView from '../CalendarView/CalendarView'
 import DropDownMenuAvatar from '../DropDown/DropDownMenuAvatar'
 import KanbanView from '../KanbanView/KanbanView'
 import ListView from '../ListView/ListView'
@@ -65,6 +66,7 @@ export default function Header() {
         <div>
           <KanbanView />
           <ListView />
+          <CalendarView />
         </div>
       </main>
     </>

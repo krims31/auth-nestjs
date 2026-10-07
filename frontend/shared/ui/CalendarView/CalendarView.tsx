@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function KanbanView() {
+export default function CalendarView() {
   const [view, setView] = useState<'kanban' | 'list' | 'calendar'>('calendar')
 
   return (
