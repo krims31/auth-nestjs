@@ -1,34 +1,35 @@
 export default async function ApiClient<T>(
   endpoint: string,
-	options?: { method?: string; body?: Record<string, unknown>; auth?: boolean }
+  options?: { method?: string; body?: Record<string, unknown>; auth?: boolean }
 ): Promise<T> {
-	const headers: Record<string, string> = {
-		'Content-Type': 'application/json'
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json'
   }
 
   const auth = options?.auth
 
   // if auth not false, add authorization header
-	if (auth !== false) {
-		const token = localStorage.getItem('access_token')
+  if (auth !== false) {
+    const token = localStorage.getItem('access_token')
 
-		if (token) {
-			headers.Authorization = `Bearer ${token}`
-		}
-	}
+    if (token) {
+      headers.Authorization = `Bearer ${token}`
+    }
+  }
 
-	// make the request
-	const response = await fetch('http://localhost:3000' + endpoint, {
-		method: options?.method || 'GET',
-		headers,
+  // make the request
+  const response = await fetch('http://localhost:3000' + endpoint, {
+    method: options?.method || 'GET',
+    headers,
     body: options?.body ? JSON.stringify(options.body) : undefined
-	})
+  })
 
-	if (!response.ok) {
-		const errorData = await response.json()
+  // Check on the error
+  if (!response.ok) {
+    const errorData = await response.json()
 
-		throw new Error(errorData.message)
-	}
+    throw new Error(errorData.message)
+  }
 
-	return response.json()
+  return response.json()
 }
