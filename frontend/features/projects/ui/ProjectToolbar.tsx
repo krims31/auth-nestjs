@@ -30,8 +30,14 @@ export default function ProjectToolbar() {
   return (
     <main className='px-1 pt-0'>
       <div className='flex items-center gap-3 mb-2'>
-        <Image src='/logo.jpeg' width={40} height={40} className='rounded' alt='Project icon' />
-        <h1 className='text-2xl font-semibold'>{currentProject?.title}</h1>
+        <Image
+          src='/logo.jpeg'
+          width={40}
+          height={40}
+          className='rounded absolute top-20'
+          alt='Project icon'
+        />
+        <h1 className='text-2xl font-semibold absolute top-21 left-82'>{currentProject?.title}</h1>
       </div>
 
       <div className='flex items-center justify-between mb-2'>
