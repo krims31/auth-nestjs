@@ -20,9 +20,14 @@ export default function CreateTaskForm({ projectId }: { projectId: string }) {
             {serverError}
           </span>
         )}
-        <button type='submit' onClick={() => console.log('BUTTON CLICKED')}>
-          <span className='text-sm font-mono border rounded-2xl p-2 bg-black text-white outline-none ml-36'>
-            Submit
+        <button type='submit'>
+          <span className='text-sm font-mono border rounded-lg p-2 bg-black text-white outline-none ml-60'>
+            Create Task
+          </span>
+        </button>
+        <button type='submit'>
+          <span className='text-sm font-mono border rounded-lg p-2 text-gray-500 outline-none ml-40 relative bottom-5'>
+            Cancel
           </span>
         </button>
       </form>
