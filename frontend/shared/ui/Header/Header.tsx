@@ -1,7 +1,12 @@
 'use client'
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Bell, Share2, Star } from 'lucide-react'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle
+} from '@/components/ui/dialog'
+import { Bell, Search, Share2, Star } from 'lucide-react'
 import Image from 'next/image'
 import { useParams, usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -13,10 +18,13 @@ import CalendarView from '../CalendarView/CalendarView'
 import DropDownMenuAvatar from '../DropDown/DropDownMenuAvatar'
 import KanbanView from '../KanbanView/KanbanView'
 import ListView from '../ListView/ListView'
+import useInputKeydown from './hooks/useInputKeydown'
 
 export default function Header() {
   const pathname = usePathname()
   const params = useParams()
+
+  const { searchRef } = useInputKeydown()
 
   const [isTaskDialogOpen, setIsTaskDialogOpen] = useState<boolean>(false)
 
@@ -33,54 +41,84 @@ export default function Header() {
   const currentProject = projects?.find(project => project.id === projectId)
 
   // Generate the breadcrumb text based on the current path and project data
-  const breadcrumb = isProject && currentProject ? `Projects / ${currentProject.title}` : 'Projects'
+  const breadcrumb =
+    isProject && currentProject
+      ? `Projects / ${currentProject.title}`
+      : 'Projects'
 
   return (
     <>
-      <header className='flex items-center justify-between p-4 relative bottom-12 left-4 border-b'>
+      <header className="flex items-center justify-between p-4 relative bottom-12 left-4 border-b">
         {/* Left part: Breadcrumb */}
-        <div className='flex items-center'>
-          <span className='text-lg text-gray-500 font-medium ml-5'>{breadcrumb}</span>
+        <div className="flex items-center">
+          <span className="text-lg text-gray-500 font-medium ml-5">
+            {breadcrumb}
+          </span>
         </div>
 
         {/* Right part: Icons */}
-        <div className='flex items-center gap-4'>
-          <div className='border rounded-sm h-8 w-8 flex items-center justify-center'>
-            <Star className='h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors' />
+        <div className="flex items-center gap-4">
+          <div className="border rounded-sm h-8 w-8 flex items-center justify-center">
+            <Star className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
           </div>
 
-          <div className='border rounded-sm h-8 w-8 flex items-center justify-center'>
-            <Share2 className='h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors' />
+          <div className="border rounded-sm h-8 w-8 flex items-center justify-center">
+            <Share2 className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
           </div>
 
-          <div className='border rounded-sm h-8 w-8 flex items-center justify-center'>
-            <Bell className='h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors' />
+          <div className="border rounded-sm h-8 w-8 flex items-center justify-center">
+            <Bell className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" />
           </div>
           <DropDownMenuAvatar />
         </div>
       </header>
-      <main className='px-1 pt-0'>
-        <div className='flex items-center gap-3 mb-2'>
-          <Image src='/logo.jpeg' width={40} height={40} className='rounded' alt='Project icon' />
-          <h1 className='text-2xl font-semibold'>{currentProject?.title}</h1>
+      <main className="px-1 pt-0">
+        <div className="flex items-center gap-3 mb-2">
+          <Image
+            src="/logo.jpeg"
+            width={40}
+            height={40}
+            className="rounded"
+            alt="Project icon"
+          />
+          <h1 className="text-2xl font-semibold">{currentProject?.title}</h1>
         </div>
 
-        <div className='flex items-center justify-between mb-2'>
-          <div className='flex gap-4'>
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex gap-4">
             <KanbanView />
             <ListView />
             <CalendarView />
           </div>
 
-          <div className='flex items-center gap-3'>
-            <Input placeholder='Search' className='w-64 mt-10' />
-            <Button variant='outline' className='mt-10'>
+          <div className="flex items-center gap-3">
+            <div className="relative w-64">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <Input
+                ref={searchRef}
+                placeholder="Search"
+                className="pl-9 pr-14"
+              />
+              <kbd className="absolute right-3 top-1/2 -translate-y-1/2 rounded border px-1.5 text-xs text-gray-400">
+                Ctrl K
+              </kbd>
+            </div>
+            <Button
+              variant="outline"
+              className="mt-10"
+            >
               Filter
             </Button>
-            <Button onClick={() => setIsTaskDialogOpen(true)} className='mt-10'>
+            <Button
+              onClick={() => setIsTaskDialogOpen(true)}
+              className="mt-10"
+            >
               Create Task
             </Button>
-            <Dialog open={isTaskDialogOpen} onOpenChange={setIsTaskDialogOpen}>
+            <Dialog
+              open={isTaskDialogOpen}
+              onOpenChange={setIsTaskDialogOpen}
+            >
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>New Task</DialogTitle>
@@ -91,7 +129,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className='h-px w-full bg-gray-300 mt-3' />
+        <div className="h-px w-full bg-gray-300 mt-3" />
       </main>
     </>
   )
