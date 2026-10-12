@@ -3,6 +3,7 @@
 import { useParams } from 'next/navigation'
 import useTask from '../../../../features/tasks/hooks/useTask'
 import TaskColumn from '../../../../features/tasks/ui/TaskColumn'
+import ProjectToolbar from '../../../../features/projects/ui/ProjectToolbar'
 
 export default function ProjectId() {
   const params = useParams()
@@ -20,6 +21,8 @@ export default function ProjectId() {
       {isPending && <span>Loading...</span>}
 
       {error instanceof Error && <span>{error.message}</span>}
+
+      <ProjectToolbar />
 
       {!isPending && !error && (
         <div className="flex gap-4 mt-6 items-start overflow-x-auto pb-4">
