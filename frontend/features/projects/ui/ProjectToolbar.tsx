@@ -1,12 +1,7 @@
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { Search } from 'lucide-react'
+import { Plus, Search, Settings2 } from 'lucide-react'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
@@ -33,55 +28,43 @@ export default function ProjectToolbar() {
   const currentProject = projects?.find(project => project.id === projectId)
 
   return (
-    <main className="px-1 pt-0">
-      <div className="flex items-center gap-3 mb-2">
-        <Image
-          src="/logo.jpeg"
-          width={40}
-          height={40}
-          className="rounded"
-          alt="Project icon"
-        />
-        <h1 className="text-2xl font-semibold">{currentProject?.title}</h1>
+    <main className='px-1 pt-0'>
+      <div className='flex items-center gap-3 mb-2'>
+        <Image src='/logo.jpeg' width={40} height={40} className='rounded' alt='Project icon' />
+        <h1 className='text-2xl font-semibold'>{currentProject?.title}</h1>
       </div>
 
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex gap-4">
+      <div className='flex items-center justify-between mb-2'>
+        <div className='flex gap-4'>
           <KanbanView />
           <ListView />
           <CalendarView />
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="relative w-64 mt-10">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-            <Input
-              ref={searchRef}
-              placeholder="Search"
-              className="pl-9 pr-14"
-            />
-            <kbd className="absolute right-3 top-1/2 -translate-y-1/2 rounded border px-1.5 text-xs text-gray-400">
+        <div className='flex items-center gap-3'>
+          <div className='relative w-64 mt-10'>
+            <Search className='absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400' />
+            <Input ref={searchRef} placeholder='Search' className='pl-9 pr-14' />
+            <kbd className='absolute right-3 top-1/2 -translate-y-1/2 rounded border px-1.5 text-xs text-gray-400'>
               Ctrl + K
             </kbd>
           </div>
-          <div>
-            <Button
-              variant="outline"
-              className="mt-10"
-            >
-              Filter
+          <div className='mt-10'>
+            <Button variant='outline' className='flex items-center gap-2'>
+              <Settings2 className='h-4 w-4 text-gray-400' />
+              <span>Filter</span>
             </Button>
           </div>
-          <Button
-            onClick={() => setIsTaskDialogOpen(true)}
-            className="mt-10"
-          >
-            Create Task
-          </Button>
-          <Dialog
-            open={isTaskDialogOpen}
-            onOpenChange={setIsTaskDialogOpen}
-          >
+          <div className='mt-10'>
+            <Button
+              onClick={() => setIsTaskDialogOpen(true)}
+              className='flex items-center justify-center gap-2'
+            >
+              <Plus className='h-4 w-4 text-white' />
+              <span>Create Task</span>
+            </Button>
+          </div>
+          <Dialog open={isTaskDialogOpen} onOpenChange={setIsTaskDialogOpen}>
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>New Task</DialogTitle>
@@ -92,7 +75,7 @@ export default function ProjectToolbar() {
         </div>
       </div>
 
-      <div className="h-px w-full bg-gray-300 mt-3" />
+      <div className='h-px w-full bg-gray-300 mt-3' />
     </main>
   )
 }
