@@ -1,7 +1,8 @@
 import { AlertCircle } from 'lucide-react'
 import useUpdateTaskStatus from '../hooks/useUpdateTaskStatus'
 import { TaskItemProps } from '../interfaces/TaskItemProps'
-import { STATUS_CONFIG, TaskStatus, taskStatuses } from '../types/TaskType'
+import type { TaskStatus } from '../types/TaskType'
+import { STATUS_CONFIG, taskStatuses } from '../types/TaskType'
 
 export default function TaskItem({ task, projectId }: TaskItemProps) {
   const { updateStatus, serverError } = useUpdateTaskStatus(projectId)
