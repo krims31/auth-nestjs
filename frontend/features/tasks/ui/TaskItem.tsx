@@ -8,14 +8,7 @@ export default function TaskItem({ task, projectId }: TaskItemProps) {
   const { updateStatus, serverError } = useUpdateTaskStatus(projectId)
 
   return (
-    <li
-      className='flex flex-col gap-1 border-b py-2'
-      draggable
-      onDragStart={e => {
-        e.dataTransfer.setData('application/x-task-id', task.id)
-        e.dataTransfer.effectAllowed = 'move'
-      }}
-    >
+    <li className='flex flex-col gap-1 border-b py-2'>
       <div className='flex items-center justify-between gap-4'>
         <p className='font-medium text-lg'>{task.title}</p>
 
