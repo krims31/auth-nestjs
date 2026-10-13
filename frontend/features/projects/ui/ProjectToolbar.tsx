@@ -16,6 +16,7 @@ export default function ProjectToolbar() {
   const params = useParams()
   const { searchRef } = useInputKeydown()
 
+  // Open DialogTask that I could write a new task
   const [isTaskDialogOpen, setIsTaskDialogOpen] = useState<boolean>(false)
 
   // Project data;
