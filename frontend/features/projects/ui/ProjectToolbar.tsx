@@ -31,6 +31,7 @@ export default function ProjectToolbar() {
     <main className='px-1 pt-0'>
       <div className='flex items-center gap-3 mb-2'>
         <Image
+          priority={true}
           src='/logo.jpeg'
           width={40}
           height={40}
