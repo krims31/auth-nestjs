@@ -1,7 +1,9 @@
-import { Task } from "../types/TaskType";
+import { Task, TaskStatus } from '../types/TaskType'
 
 export interface TaskColumnProps {
-  projectId: string;
-  title: string;
-  tasks: Task[] | undefined;
+  projectId: string
+  status: TaskStatus
+  title: string
+  tasks?: Task[] | undefined
+  onAdd?: () => void
 }
