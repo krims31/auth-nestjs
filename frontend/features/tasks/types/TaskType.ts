@@ -6,6 +6,10 @@ export type Task = {
   createdAt: string
 }
 
+export const taskStatuses = ['TODO', 'IN_PROGRESS', 'DONE'] as const
+
+export type TaskStatus = (typeof taskStatuses)[number]
+
 export const STATUS_CONFIG: Record<
   TaskStatus,
   { label: string; dot: string; badge: string; header: string }
@@ -29,7 +33,3 @@ export const STATUS_CONFIG: Record<
     header: 'bg-emerald-50'
   }
 }
-
-export const taskStatuses = ['TODO', 'IN_PROGRESS', 'DONE'] as const
-
-export type TaskStatus = (typeof taskStatuses)[number]
