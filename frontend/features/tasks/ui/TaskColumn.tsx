@@ -1,10 +1,13 @@
 import { Plus } from 'lucide-react'
 import { TaskColumnProps } from '../interfaces/TaskColumnProps'
-import { STATUS_CONFIG, TaskStatus } from '../types/TaskType'
+import type { TaskStatus } from '../types/TaskType'
+import { STATUS_CONFIG } from '../types/TaskType'
 import TaskItem from './TaskItem'
 
 export default function TaskColumn({ projectId, status, tasks = [], onAdd }: TaskColumnProps) {
   const config = STATUS_CONFIG[status as TaskStatus]
+
+  if (!config) return null
 
   return (
     <div className='flex w-72 shrink-0 flex-col gap-3'>
