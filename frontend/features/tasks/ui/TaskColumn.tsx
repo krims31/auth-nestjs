@@ -1,3 +1,5 @@
+import { useDroppable } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { Plus } from 'lucide-react'
 import { TaskColumnProps } from '../interfaces/TaskColumnProps'
 import type { TaskStatus } from '../types/TaskType'
@@ -7,10 +9,17 @@ import TaskItem from './TaskItem'
 export default function TaskColumn({ projectId, status, tasks = [], onAdd }: TaskColumnProps) {
   const config = STATUS_CONFIG[status as TaskStatus]
 
+  const { setNodeRef, isOver } = useDroppable({ id: status })
+
   if (!config) return null
 
   return (
-    <div className='flex w-72 shrink-0 flex-col gap-3'>
+    <div
+      ref={setNodeRef}
+      className={`flex w-72 shrink-0 flex-col gap-3 rounded-lg transition ${
+        isOver ? 'ring-2 ring-sky-400 bg-sky-50/40' : ''
+      }`}
+    >
       <div className={`flex items-center justify-between rounded-lg px-3 py-2 ${config.header}`}>
         <div className='flex items-center gap-2'>
           <span className={`h-2 w-2 rounded-full ${config.dot}`} />
@@ -27,11 +36,13 @@ export default function TaskColumn({ projectId, status, tasks = [], onAdd }: Tas
         </button>
       </div>
 
-      <ul className='flex flex-col gap-2'>
-        {tasks.map(task => (
-          <TaskItem key={task.id} task={task} projectId={projectId} />
-        ))}
-      </ul>
+      <SortableContext items={tasks.map(t => t.id)} strategy={verticalListSortingStrategy}>
+        <ul className='flex flex-col gap-2 min-h-10'>
+          {tasks.map(task => (
+            <TaskItem key={task.id} task={task} projectId={projectId} />
+          ))}
+        </ul>
+      </SortableContext>
     </div>
   )
 }

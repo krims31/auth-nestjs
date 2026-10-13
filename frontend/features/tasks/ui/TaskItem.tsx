@@ -1,3 +1,5 @@
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 import { AlertCircle } from 'lucide-react'
 import useUpdateTaskStatus from '../hooks/useUpdateTaskStatus'
 import { TaskItemProps } from '../interfaces/TaskItemProps'
@@ -7,10 +9,23 @@ import { STATUS_CONFIG, taskStatuses } from '../types/TaskType'
 export default function TaskItem({ task, projectId }: TaskItemProps) {
   const { updateStatus, serverError } = useUpdateTaskStatus(projectId)
 
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: task.id,
+    data: { status: task.status }
+  })
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1
+  }
+
   return (
-    <li className='flex flex-col gap-1 border-b py-2'>
+    <li ref={setNodeRef} style={style} className='flex flex-col gap-1 border-b py-2'>
       <div className='flex items-center justify-between gap-4'>
-        <p className='font-medium text-lg'>{task.title}</p>
+        <div {...attributes} {...listeners} className='flex-1'>
+          <p className='font-medium text-lg'>{task.title}</p>
+        </div>
 
         <select
           value={task.status}
