@@ -9,7 +9,8 @@ export default function useTask(projectId: string) {
     error
 	} = useQuery({
 		queryKey: ['tasks', projectId],
-		queryFn: () => getTasks(projectId)
+		queryFn: () => getTasks(projectId),
+		enabled: Boolean(projectId)
   })
 
 	const todoTasks = tasks?.filter(task => task.status === 'TODO')
