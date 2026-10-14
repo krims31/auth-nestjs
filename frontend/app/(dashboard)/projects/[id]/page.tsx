@@ -25,23 +25,24 @@ export default function ProjectId() {
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }))
 
-  const handleDragEnd = (e: DragEndEvent) => {
-    const { active, over } = e
-    if (!over) return
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event
+    if (!over || active.id === over.id) return
 
-    const taskId = active.id as string
+    const taskId = String(active.id)
 
     const statuses: TaskStatus[] = ['TODO', 'IN_PROGRESS', 'DONE']
 
-    // 1) Throw a direct on the column (In empty place)
-    if (statuses.includes(over.id as TaskStatus)) {
-      updateStatus(taskId, over.id as TaskStatus)
-      return
-    }
 
-    // 2) Throw on the task — take a status this task
-    const overStatus = over.data.current?.status as TaskStatus | undefined
-    if (overStatus) updateStatus(taskId, overStatus)
+    const targetStatuses = statuses.includes(String(over.id) as TaskStatus) ? (String(over.id) as TaskStatus) : (over.data.current?.status as TaskStatus | undefined)
+
+    if (!targetStatuses) return;
+
+    const currentStatus = active.data.current?.status as TaskStatus | undefined
+
+    if (currentStatus === targetStatuses) return
+
+    updateStatus(taskId, targetStatuses)
   }
 
   return (
