@@ -17,7 +17,7 @@ export const STATUS_CONFIG: Record<
   TODO: {
     label: 'To Do',
     dot: 'bg-sky-500',
-    badge: 'bg-sky-50 text-sky-700 border-sky-200',
+    badge: 'bg-sky-50 text-blue-700 border-sky-200',
     header: 'bg-sky-50'
   },
   IN_PROGRESS: {
