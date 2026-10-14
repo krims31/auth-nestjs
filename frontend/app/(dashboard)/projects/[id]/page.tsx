@@ -4,10 +4,12 @@ import {
   closestCorners,
   DndContext,
   DragEndEvent,
+  KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors
 } from '@dnd-kit/core'
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import { useParams } from 'next/navigation'
 import ProjectToolbar from '../../../../features/projects/ui/ProjectToolbar'
 import useTask from '../../../../features/tasks/hooks/useTask'
@@ -23,7 +25,12 @@ export default function ProjectId() {
 
   const { updateStatus } = useUpdateTaskStatus(projectId)
 
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }))
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } 
+  }),
+  useSensor(KeyboardSensor, {
+  coordinateGetter: sortableKeyboardCoordinates
+  }),
+)
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
