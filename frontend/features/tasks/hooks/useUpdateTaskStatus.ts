@@ -30,26 +30,21 @@ export default function useUpdateTaskStatus(projectId: string) {
 		}) => {
 			return updateTasks(projectId, taskId, status)
 		},
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['tasks', projectId] })
-		}
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({
+				queryKey: ['tasks', projectId]
+			})
+		},
+
+		onError: (error: Error) => {
+			setServerError(error.message || "Something went wrong")
+		},
   })
 
 	// Update Status for tasks
 	const updateStatus = (taskId: string, status: TaskStatus) => {
-		mutation.mutate(
-			{ taskId, status },
-			{
-				onError: error => {
-					if (error instanceof Error) {
-						setServerError(error.message)
-					} else {
-						setServerError('Something went wrong')
-					}
-				}
-			}
-		)
-		return { updateStatus, serverError }
+		mutation.mutate({ taskId, status })
+		return { updateStatus, serverError, isPending: mutation.isPending }
 	}
 
 	return {
