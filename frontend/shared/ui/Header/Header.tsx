@@ -2,21 +2,13 @@
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Bell, Moon, Share2, Star, Sun } from 'lucide-react'
-import { useState } from 'react'
 import DropDownMenuAvatar from '../DropDown/DropDownMenuAvatar'
 import HeaderIconButton from './HeaderIconButtons'
 import useBreadcrumb from './hooks/useBreadcrumb'
 import useNotification from './hooks/useNotification'
 import NotificationsPanel from './Notification/NotificationPanel'
-
 export default function Header() {
   const { breadcrumb } = useBreadcrumb()
-
-  const [isDark, setIsDark] = useState<boolean>(false)
-
-  const toggleTheme = () => {
-    setIsDark(!isDark)
-  }
 
   const {
     notifications,
