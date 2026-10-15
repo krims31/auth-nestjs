@@ -2,6 +2,7 @@
 
 import { Bell, Share2, Star } from 'lucide-react'
 import DropDownMenuAvatar from '../DropDown/DropDownMenuAvatar'
+import HeaderIconButton from './HeaderIconButtons'
 import useBreadcrumb from './hooks/useBreadcrumb'
 
 export default function Header() {
@@ -16,17 +17,11 @@ export default function Header() {
         </div>
 
         {/* Right part: Icons */}
-        <div className='flex items-center gap-4'>
-          <div className='border rounded-sm h-8 w-8 flex items-center justify-center'>
-            <Star className='h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors' />
-          </div>
-
-          <div className='border rounded-sm h-8 w-8 flex items-center justify-center'>
-            <Share2 className='h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors' />
-          </div>
-
-          <div className='border rounded-sm h-8 w-8 flex items-center justify-center'>
-            <Bell className='h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors' />
+        <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-2'>
+            <HeaderIconButton icon={Star} label='Favorite' />
+            <HeaderIconButton icon={Share2} label='Share' />
+            <HeaderIconButton icon={Bell} label='Notifications' dot />
           </div>
           <DropDownMenuAvatar />
         </div>
