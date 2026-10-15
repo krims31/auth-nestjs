@@ -39,7 +39,7 @@ export default function ProjectToolbar() {
           className='rounded'
           alt='Project icon'
         />
-        <h1 className='text-2xl font-semibold'>{currentProject?.title}</h1>
+        <h1 className='text-2xl text-slate-800 drop-shadow-sm'>{currentProject?.title}</h1>
       </div>
 
       <div className='flex items-center justify-between mb-2'>
