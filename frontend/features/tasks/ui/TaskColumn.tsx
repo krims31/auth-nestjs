@@ -23,8 +23,10 @@ export default function TaskColumn({ projectId, status, tasks = [], onAdd }: Tas
       <div className={`flex items-center justify-between rounded-lg px-3 py-2 ${config.header}`}>
         <div className='flex items-center gap-2'>
           <span className={`h-2 w-2 rounded-full ${config.dot}`} />
-          <h2 className='text-sm font-medium'>{config.label}</h2>
-          <span className='rounded-full bg-white px-2 text-xs text-gray-600'>{tasks.length}</span>
+          <h2 className={`text-sm font-medium ${config.text}`}>{config.label}</h2>
+          <span className={`rounded-full px-2 text-sm font-medium ${config.count}`}>
+            {tasks.length}
+          </span>
         </div>
         <button
           type='button'
