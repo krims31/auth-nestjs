@@ -6,9 +6,14 @@ import DropDownMenuAvatar from '../DropDown/DropDownMenuAvatar'
 import HeaderIconButton from './HeaderIconButtons'
 import useBreadcrumb from './hooks/useBreadcrumb'
 import useNotification from './hooks/useNotification'
+import useTheme from './hooks/useTheme'
 import NotificationsPanel from './Notification/NotificationPanel'
 export default function Header() {
   const { breadcrumb } = useBreadcrumb()
+
+  const { theme, toggleTheme } = useTheme()
+
+  const isDark = theme === 'dark'
 
   const {
     notifications,
