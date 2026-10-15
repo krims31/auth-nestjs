@@ -1,38 +1,62 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import {Plus} from 'lucide-react'
-import useProject from '../../../../features/projects/hooks/useProject'
-import { useState } from 'react'
-import CreateProjectForm from '../../../../features/projects/ui/CreateProjectForm'
+import {
+  SidebarGroup,
+  SidebarGroupAction,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSkeleton
+} from '@/components/ui/sidebar'
+import { Plus } from 'lucide-react'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
+import { useState } from 'react'
+import useProject from '../../../../features/projects/hooks/useProject'
+import CreateProjectForm from '../../../../features/projects/ui/CreateProjectForm'
 
 export default function Projects() {
-  const { project } = useProject()
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const { project: projects, isPending, error } = useProject()
+  const params = useParams()
+  const activeId = params.id as string | undefined
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <>
-      <div>
-        <h1 className="text-md relative top-20 text-gray-500 left-3">Projects</h1>
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>New Project</DialogTitle>
-            </DialogHeader>
-            <CreateProjectForm />
-          </DialogContent>
-        </Dialog>
-        <ul className="flex flex-col gap-2 relative top-22">
-            {project?.map(project => (
-              <li key={project.id}>
-                <Link href={`/projects/${project.id}`}>{project.title}</Link>
-              </li>
-            ))}
-            <li className="relative bottom-43 left-50">
-              <button onClick={() => setIsOpen(true)} className="border rounded-sm transition duration-300 hover:bg-slate-100">
-                <Plus className="text-slate-500" />
-              </button>
-            </li>
-          </ul>
-      </div>
-    </>
+    <SidebarGroup>
+      <SidebarGroupLabel>Projects</SidebarGroupLabel>
+      <SidebarGroupAction aria-label='New project' onClick={() => setIsOpen(true)}>
+        <Plus />
+      </SidebarGroupAction>
+
+      <SidebarGroupContent>
+        <SidebarMenu>
+          {isPending && <SidebarMenuSkeleton />}
+          {error instanceof Error && <li className='px-2 text-xs text-red-500'>{error.message}</li>}
+          {projects?.length === 0 && (
+            <li className='px-2 text-xs text-gray-400'>No projects yet</li>
+          )}
+          {projects?.map(p => (
+            <SidebarMenuItem key={p.id}>
+              <SidebarMenuButton
+                isActive={p.id === activeId}
+                render={<Link href={`/projects/${p.id}`} />}
+              >
+                <span className='truncate'>{p.title}</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarGroupContent>
+
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>New Project</DialogTitle>
+          </DialogHeader>
+          <CreateProjectForm /* onSuccess={() => setIsOpen(false)} */ />
+        </DialogContent>
+      </Dialog>
+    </SidebarGroup>
   )
 }
