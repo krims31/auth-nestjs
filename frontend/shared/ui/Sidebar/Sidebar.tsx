@@ -3,6 +3,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel
@@ -15,10 +16,10 @@ import SystemItems from './SystemItems/SystemItems'
 
 export function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar className='flex flex-col h-screen'>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className='text-md relative top-20'>General</SidebarGroupLabel>
+          <SidebarGroupLabel className='text-lg relative top-20'>General</SidebarGroupLabel>
           <Ellipsis className='absolute top-23 right-3 text-gray-500' />
           <SidebarGroupContent>
             {/* Logo */}
@@ -28,12 +29,15 @@ export function AppSidebar() {
               <Items />
               {/* Projects Section */}
               <Projects />
-              {/* System Items */}
-              <SystemItems />
             </main>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
+      {/* System Items */}
+      <SidebarFooter className='pb-4'>
+        <SystemItems />
+      </SidebarFooter>
     </Sidebar>
   )
 }
