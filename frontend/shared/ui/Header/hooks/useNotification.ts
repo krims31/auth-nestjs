@@ -29,6 +29,8 @@ const initial: Notification[] = [
 export default function useNotifications() {
   const [notifications, setNotifications] = useState<Notification[]>(initial)
 
+  const [isOpenNotification, setIsOpenNotification] = useState<boolean>(false)
+
   const unreadCount = notifications.filter(n => !n.read).length
 
   const markAsRead = (id: string) =>
@@ -36,5 +38,12 @@ export default function useNotifications() {
 
   const markAllAsRead = () => setNotifications(prev => prev.map(n => ({ ...n, read: true })))
 
-  return { notifications, unreadCount, markAsRead, markAllAsRead }
+  return {
+    notifications,
+    isOpenNotification,
+    setIsOpenNotification,
+    unreadCount,
+    markAsRead,
+    markAllAsRead
+  }
 }
