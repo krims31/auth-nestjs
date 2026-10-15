@@ -25,12 +25,12 @@ export default function ProjectId() {
 
   const { updateStatus } = useUpdateTaskStatus(projectId)
 
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } 
-  }),
-  useSensor(KeyboardSensor, {
-  coordinateGetter: sortableKeyboardCoordinates
-  }),
-)
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates
+    })
+  )
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
@@ -40,10 +40,11 @@ export default function ProjectId() {
 
     const statuses: TaskStatus[] = ['TODO', 'IN_PROGRESS', 'DONE']
 
+    const targetStatuses = statuses.includes(String(over.id) as TaskStatus)
+      ? (String(over.id) as TaskStatus)
+      : (over.data.current?.status as TaskStatus | undefined)
 
-    const targetStatuses = statuses.includes(String(over.id) as TaskStatus) ? (String(over.id) as TaskStatus) : (over.data.current?.status as TaskStatus | undefined)
-
-    if (!targetStatuses) return;
+    if (!targetStatuses) return
 
     const currentStatus = active.data.current?.status as TaskStatus | undefined
 
@@ -66,7 +67,7 @@ export default function ProjectId() {
 
       {!isPending && !error && (
         <DndContext sensors={sensors} collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
-          <div className='flex gap-4 mt-6 items-start overflow-x-auto pb-4'>
+          <div className='flex gap-4 items-start overflow-x-auto pb-4 relative bottom-5'>
             <TaskColumn projectId={projectId} status='TODO' tasks={todoTasks} />
             <TaskColumn projectId={projectId} status='IN_PROGRESS' tasks={inProgressTasks} />
             <TaskColumn projectId={projectId} status='DONE' tasks={doneTasks} />

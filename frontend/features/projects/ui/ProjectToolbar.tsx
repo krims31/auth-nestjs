@@ -29,17 +29,17 @@ export default function ProjectToolbar() {
   const currentProject = projects?.find(project => project.id === projectId)
 
   return (
-    <main className='px-1 pt-0'>
+    <main className='px-1 relative bottom-13'>
       <div className='flex items-center gap-3 mb-2'>
         <Image
           priority={true}
           src='/logo.jpeg'
           width={40}
           height={40}
-          className='rounded absolute top-20'
+          className='rounded'
           alt='Project icon'
         />
-        <h1 className='text-2xl font-semibold absolute top-21 left-82'>{currentProject?.title}</h1>
+        <h1 className='text-2xl font-semibold'>{currentProject?.title}</h1>
       </div>
 
       <div className='flex items-center justify-between mb-2'>

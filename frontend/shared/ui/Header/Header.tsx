@@ -18,11 +18,13 @@ export default function Header() {
 
         {/* Right part: Icons */}
         <div className='flex items-center gap-2'>
-          <HeaderIconButton icon={Star} label='Favorite' />
-          <HeaderIconButton icon={Share2} label='Share' />
-          <HeaderIconButton icon={Bell} label='Notifications' dot />
+          <div className='flex items-center gap-2'>
+            <HeaderIconButton icon={Star} label='Favorite' />
+            <HeaderIconButton icon={Share2} label='Share' />
+            <HeaderIconButton icon={Bell} label='Notifications' dot />
+          </div>
+          <DropDownMenuAvatar />
         </div>
-        <DropDownMenuAvatar />
       </header>
     </>
   )
