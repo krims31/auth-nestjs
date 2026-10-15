@@ -1,9 +1,13 @@
-import { createContext, useEffect, useMemo, useState } from 'react'
+import { createContext, ReactNode, useEffect, useMemo, useState } from 'react'
 import { ThemeContextType } from './interface/ThemeContextType'
 
 export const ThemeContext = createContext<ThemeContextType | null>(null)
 
-export default function ThemeProvider({ children }: ReactNode) {
+interface ThemeProviderProps {
+  children: ReactNode
+}
+
+export default function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<string>(() => {
     if (typeof window !== undefined) {
       return localStorage.getItem('app-color-theme') || 'light'
