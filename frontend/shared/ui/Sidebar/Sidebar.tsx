@@ -19,7 +19,7 @@ export function AppSidebar() {
     <Sidebar className='flex flex-col h-screen'>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className='text-lg relative top-20'>General</SidebarGroupLabel>
+          <SidebarGroupLabel className='text-base relative top-20'>General</SidebarGroupLabel>
           <Ellipsis className='absolute top-23 right-3 text-gray-500' />
           <SidebarGroupContent>
             {/* Logo */}

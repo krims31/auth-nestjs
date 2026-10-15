@@ -18,7 +18,7 @@ export default function SystemItems() {
     <>
       <div className='mt-auto w-full'>
         <SidebarMenu>
-          <SidebarGroupLabel className='text-lg relative left-3 text-slate-500'>
+          <SidebarGroupLabel className='text-base relative left-3 text-slate-500'>
             System
           </SidebarGroupLabel>
           {systemItems.map(item => (
