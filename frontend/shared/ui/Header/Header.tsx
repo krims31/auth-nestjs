@@ -1,7 +1,7 @@
 'use client'
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Bell, Share2, Star } from 'lucide-react'
+import { Bell, Moon, Share2, Star, Sun } from 'lucide-react'
 import { useState } from 'react'
 import DropDownMenuAvatar from '../DropDown/DropDownMenuAvatar'
 import HeaderIconButton from './HeaderIconButtons'
@@ -12,9 +12,20 @@ import NotificationsPanel from './Notification/NotificationPanel'
 export default function Header() {
   const { breadcrumb } = useBreadcrumb()
 
-  const [isOpenNotification, setIsOpenNotification] = useState<boolean>(false)
+  const [isDark, setIsDark] = useState<boolean>(false)
 
-  const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotification()
+  const toggleTheme = () => {
+    setIsDark(!isDark)
+  }
+
+  const {
+    notifications,
+    isOpenNotification,
+    setIsOpenNotification,
+    unreadCount,
+    markAsRead,
+    markAllAsRead
+  } = useNotification()
 
   return (
     <>
@@ -29,6 +40,12 @@ export default function Header() {
           <div className='flex items-center gap-2'>
             <HeaderIconButton icon={Star} label='Favorite' />
             <HeaderIconButton icon={Share2} label='Share' />
+            {isDark ? (
+              <HeaderIconButton icon={Sun} label='Sun' onClick={toggleTheme} />
+            ) : (
+              <HeaderIconButton icon={Moon} label='Moon' onClick={toggleTheme} />
+            )}
+
             <Popover open={isOpenNotification} onOpenChange={setIsOpenNotification}>
               <PopoverTrigger
                 render={
