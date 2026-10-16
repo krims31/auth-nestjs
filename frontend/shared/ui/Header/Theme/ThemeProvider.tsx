@@ -11,7 +11,7 @@ interface ThemeProviderProps {
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<string>(() => {
-    if (typeof window !== undefined) {
+    if (typeof window !== 'undefined') {
       return localStorage.getItem('app-color-theme') || 'light'
     }
     return 'light'
