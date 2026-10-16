@@ -11,6 +11,7 @@ import NotificationsPanel from './Notification/NotificationPanel'
 export default function Header() {
   const { breadcrumb } = useBreadcrumb()
 
+  // Change theme.
   const { theme, toggleTheme } = useTheme()
 
   const isDark = theme === 'dark'
