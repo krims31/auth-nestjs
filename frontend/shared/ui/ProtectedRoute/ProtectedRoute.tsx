@@ -3,30 +3,27 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
+// Authentication status.
 type AuthStatus = 'loading' | 'authenticated' | 'unauthenticated'
 
-export default function ProtectedRoute({
-	children
-}: {
-	children: React.ReactNode
-}) {
-	const router = useRouter()
-	const [status, setStatus] = useState<AuthStatus>('loading')
+export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const router = useRouter()
+  const [status, setStatus] = useState<AuthStatus>('loading')
 
-	useEffect(() => {
-		const token = localStorage.getItem('access_token')
-		// eslint-disable-next-line react-hooks/set-state-in-effect
-		setStatus(token ? 'authenticated' : 'unauthenticated')
-	}, [])
+  useEffect(() => {
+    const token = localStorage.getItem('access_token')
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setStatus(token ? 'authenticated' : 'unauthenticated')
+  }, [])
 
-	useEffect(() => {
-		if (status === 'unauthenticated') {
-			router.push('/auth/login')
-		}
-	}, [status, router])
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/auth/login')
+    }
+  }, [status, router])
 
-	if (status !== 'authenticated') {
-		return <div className="text-2xl flex items-center h-screen">Loading...</div>
-	}
-	return <>{children}</>
+  if (status !== 'authenticated') {
+    return <div className='text-2xl flex items-center h-screen'>Loading...</div>
+  }
+  return <>{children}</>
 }
