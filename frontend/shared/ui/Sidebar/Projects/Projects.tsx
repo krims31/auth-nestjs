@@ -16,13 +16,16 @@ import { useState } from 'react'
 import useProject from '../../../../features/projects/hooks/useProject'
 import CreateProjectForm from '../../../../features/projects/ui/CreateProjectForm'
 
+const COLORS = ['bg-sky-500', 'bg-amber-500', 'bg-emerald-500', 'bg-violet-500', 'bg-rose-500']
+
 export default function Projects() {
   const { project: projects, isPending, error } = useProject()
+
   const params = useParams()
   const activeId = params.id as string | undefined
-  const [isOpen, setIsOpen] = useState(false)
 
-  const COLORS = ['bg-sky-500', 'bg-amber-500', 'bg-emerald-500', 'bg-violet-500', 'bg-rose-500']
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
 
   return (
     <SidebarGroup className='flex-1 min-h-0 relative top-10'>
