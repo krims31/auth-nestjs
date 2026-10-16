@@ -5,42 +5,41 @@ import { Field, FieldLabel } from '../../../components/ui/field'
 import { Input } from '../../../components/ui/input'
 
 export default function InputPassword({
-	registration,
-	error
+  registration,
+  error
 }: {
-	registration: UseFormRegisterReturn
-	error?: string
+  registration: UseFormRegisterReturn
+  error?: string
 }) {
-	const [visible, setVisible] = useState(false)
-	return (
-		<div className="flex flex-col gap-1 mb-4">
-			<Field>
-				<FieldLabel
-					htmlFor="password"
-					className="relative top-15 left-10 text-[15px] font-mono"
-				>
-					Password
-				</FieldLabel>
-				<Input
-					type={visible ? 'text' : 'password'}
-					placeholder="Password"
-					{...registration}
-					className="relative top-15 left-10 font-mono w-85!"
-				/>
-				{error && (
-					<span className="text-red-500 text-sm font-mono flex items-center gap-1">
-						<AlertCircle size={14} />
-						{error}
-					</span>
-				)}
-				<button
-					type="button"
-					onClick={() => setVisible(!visible)}
-					className="relative top-6.5 left-87"
-				>
-					{visible ? <EyeOff size={20} /> : <Eye size={20} />}
-				</button>
-			</Field>
-		</div>
-	)
+  // Visible icon for the password.
+  const [visible, setVisible] = useState<boolean>(false)
+
+  return (
+    <div className='flex flex-col gap-1 mb-4'>
+      <Field>
+        <FieldLabel htmlFor='password' className='relative top-15 left-10 text-[15px] font-mono'>
+          Password
+        </FieldLabel>
+        <Input
+          type={visible ? 'text' : 'password'}
+          placeholder='Password'
+          {...registration}
+          className='relative top-15 left-10 font-mono w-85!'
+        />
+        {error && (
+          <span className='text-red-500 text-sm font-mono flex items-center gap-1'>
+            <AlertCircle size={14} />
+            {error}
+          </span>
+        )}
+        <button
+          type='button'
+          onClick={() => setVisible(!visible)}
+          className='relative top-6.5 left-87'
+        >
+          {visible ? <EyeOff size={20} /> : <Eye size={20} />}
+        </button>
+      </Field>
+    </div>
+  )
 }
