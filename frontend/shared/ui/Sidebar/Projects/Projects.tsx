@@ -24,8 +24,8 @@ export default function Projects() {
   const params = useParams()
   const activeId = params.id as string | undefined
 
+  // Open Dialog for the create project.
   const [isOpen, setIsOpen] = useState<boolean>(false)
-
 
   return (
     <SidebarGroup className='flex-1 min-h-0 relative top-10'>
