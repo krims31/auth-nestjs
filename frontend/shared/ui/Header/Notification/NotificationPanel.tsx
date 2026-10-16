@@ -1,14 +1,7 @@
 'use client'
 
 import { CheckCheck, Inbox } from 'lucide-react'
-
-export interface Notification {
-  id: string
-  title: string
-  description?: string
-  createdAt: string
-  read: boolean
-}
+import { Notification } from './interface/Notification'
 
 interface Props {
   notifications: Notification[]
