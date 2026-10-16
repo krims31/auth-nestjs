@@ -4,9 +4,9 @@ export default function useInputKeydown() {
   const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    const handleKeydown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault()
+    const handleKeydown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
         searchRef.current?.focus()
       }
     }
@@ -18,7 +18,7 @@ export default function useInputKeydown() {
     }
   }, [])
 
-	return {
-		searchRef
-	}
+  return {
+    searchRef
+  }
 }
