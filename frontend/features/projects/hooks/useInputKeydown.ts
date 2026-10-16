@@ -11,8 +11,10 @@ export default function useInputKeydown() {
       }
     }
 
+    // Invoke(Listener) keydown.
     window.addEventListener('keydown', handleKeydown)
 
+    // Cleanup keydown.
     return () => {
       window.removeEventListener('keydown', handleKeydown)
     }
