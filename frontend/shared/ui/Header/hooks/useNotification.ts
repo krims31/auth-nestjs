@@ -1,39 +1,31 @@
 'use client'
 import { useState } from 'react'
-import type { Notification } from '../../Header/Notification/NotificationPanel'
-
-const initial: Notification[] = [
+import { NotificationItem } from '../Notification/interface/NotificationItem'
+const initial: NotificationItem[] = [
   {
-    id: '1',
+    id: 1,
     title: 'New task assigned',
     description: 'Fix login bug',
     createdAt: '2m ago',
     read: false
   },
   {
-    id: '2',
+    id: 2,
     title: 'Comment on your task',
-    description: '«Looks good!»',
+    description: 'Looks good!',
     createdAt: '1h ago',
     read: false
   },
-  {
-    id: '3',
-    title: 'Project updated',
-    description: 'Design v2',
-    createdAt: 'yesterday',
-    read: true
-  }
+  { id: 3, title: 'Project updated', description: 'Design v2', createdAt: 'yesterday', read: true }
 ]
 
 export default function useNotifications() {
-  const [notifications, setNotifications] = useState<Notification[]>(initial)
-
+  const [notifications, setNotifications] = useState<NotificationItem[]>(initial)
   const [isOpenNotification, setIsOpenNotification] = useState<boolean>(false)
 
   const unreadCount = notifications.filter(n => !n.read).length
 
-  const markAsRead = (id: string) =>
+  const markAsRead = (id: number) =>
     setNotifications(prev => prev.map(n => (n.id === id ? { ...n, read: true } : n)))
 
   const markAllAsRead = () => setNotifications(prev => prev.map(n => ({ ...n, read: true })))
