@@ -16,7 +16,7 @@ export default function ListView() {
                 top-5
                 text-foreground
                 hover:border-b-blue-500
-                ${view === 'list' ? 'border-b-blue-500 bg-blue-500/10' : ''}
+                ${view === 'list' ? 'border-b-blue-500 dark:bg-sidebar-accent' : ''}
               `}
           >
             List View

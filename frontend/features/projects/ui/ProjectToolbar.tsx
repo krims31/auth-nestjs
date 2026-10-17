@@ -69,7 +69,7 @@ export default function ProjectToolbar() {
           <div className='mt-10'>
             <Button
               onClick={() => setIsTaskDialogOpen(true)}
-              className='flex items-center justify-center gap-2 dark:bg-black'
+              className='flex items-center justify-center gap-2 dark:bg-sidebar-accent'
             >
               <Plus className='h-4 w-4 text-white' />
               <span className='dark:text-white'>Create Task</span>
