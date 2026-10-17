@@ -1,13 +1,13 @@
 import {
+  SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem
+  SidebarMenuItem,
+  sidebarMenuButtonVariants
 } from '@/components/ui/sidebar'
 import { CircleQuestionMark, Settings } from 'lucide-react'
 import Link from 'next/link'
 
-// SystemItems
 const systemItems = [
   { title: 'Settings', url: '/', icon: Settings },
   { title: 'Help Center', url: '/', icon: CircleQuestionMark }
@@ -15,27 +15,29 @@ const systemItems = [
 
 export default function SystemItems() {
   return (
-    <>
-      <div className='mt-auto w-full'>
+    <div className='mt-auto w-full'>
+      <SidebarGroup>
+        <SidebarGroupLabel className='relative left-3 text-base text-slate-500'>
+          System
+        </SidebarGroupLabel>
+
         <SidebarMenu>
-          <SidebarGroupLabel className='text-base relative left-3 text-slate-500'>
-            System
-          </SidebarGroupLabel>
           {systemItems.map(item => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton>
-                <Link
-                  href={item.url}
-                  className='flex items-center gap-4 w-full h-full text-sm font-mono'
-                >
-                  <item.icon className='h-4 w-4' />
-                  <span>{item.title}</span>
-                </Link>
-              </SidebarMenuButton>
+              <Link
+                href={item.url}
+                className={`${sidebarMenuButtonVariants({
+                  variant: 'default',
+                  size: 'default'
+                })} flex min-h-12 w-full items-center gap-2`}
+              >
+                <item.icon className='size-4 shrink-0' aria-hidden='true' />
+                <span>{item.title}</span>
+              </Link>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
-      </div>
-    </>
+      </SidebarGroup>
+    </div>
   )
 }
