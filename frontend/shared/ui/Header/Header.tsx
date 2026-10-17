@@ -30,7 +30,9 @@ export default function Header() {
       <header className='flex items-center justify-between p-4 relative bottom-12 left-4 border-b'>
         {/* Left part: Breadcrumb */}
         <div className='flex items-center'>
-          <span className='text-lg text-gray-500 font-medium ml-5'>{breadcrumb}</span>
+          <span className='text-lg text-gray-500 font-medium ml-5 dark:text-white'>
+            {breadcrumb}
+          </span>
         </div>
 
         {/* Right part: Icons */}

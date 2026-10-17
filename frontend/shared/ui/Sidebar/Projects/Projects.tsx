@@ -27,7 +27,7 @@ export default function Projects() {
 
   return (
     <SidebarGroup className='flex-1 min-h-0 relative top-10'>
-      <SidebarGroupLabel className='h-10 px-3 text-base font-semibold text-sidebar-foreground/70'>
+      <SidebarGroupLabel className='h-10 px-3 text-base text-sidebar-foreground/70'>
         Projects
         {projects && (
           <span className='ml-2 rounded-full bg-sidebar-accent px-2 text-xs font-normal text-sidebar-foreground/70'>
