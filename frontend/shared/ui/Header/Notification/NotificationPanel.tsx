@@ -1,12 +1,11 @@
 'use client'
 
 import { CheckCheck, Inbox } from 'lucide-react'
-import { Notification } from './interface/Notification'
-
+import { NotificationItem } from './interface/NotificationItem'
 interface Props {
-  notifications: Notification[]
+  notifications: NotificationItem[]
   unreadCount: number
-  onRead: (id: string) => void
+  onRead: (id: number) => void
   onReadAll: () => void
   onClose: () => void
 }
