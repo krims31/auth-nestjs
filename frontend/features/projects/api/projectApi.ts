@@ -1,15 +1,22 @@
 import ApiClient from '../../../shared/api/api-client'
-import { Project } from '../types/ProjectFromValues'
+
+type Project = {
+  id: string
+  title: string
+  description: string | null
+  ownerId: string
+  createAt: string
+}
 
 // Get /projects
 export async function getProjects(): Promise<Project[]> {
-	return ApiClient('/projects')
+  return ApiClient<Project[]>('/projects')
 }
 
 // Create projects
 export async function createProject(data: {
-	title: string
-	description?: string
+  title: string
+  description?: string
 }): Promise<Project> {
-	return ApiClient('/projects', { method: 'POST', body: data })
+  return ApiClient<Project>('/projects', { method: 'POST', body: data })
 }
