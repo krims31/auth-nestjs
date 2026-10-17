@@ -17,7 +17,7 @@ import CreateProjectForm from '../../../../features/projects/ui/CreateProjectFor
 const COLORS = ['bg-sky-500', 'bg-amber-500', 'bg-emerald-500', 'bg-violet-500', 'bg-rose-500']
 
 export default function Projects() {
-  const { project: projects, isPending, error } = useProject()
+  const { project: projects } = useProject()
 
   const params = useParams()
   const activeId = params.id as string | undefined
@@ -46,7 +46,6 @@ export default function Projects() {
 
       <SidebarGroupContent className='min-h-0 overflow-y-auto rounded-xl border border-sidebar-border bg-sidebar-accent/30 p-1.5'>
         <SidebarMenu className='gap-1'>
-          {/* skeleton / error / empty — те же, с обновлёнными цветами */}
           {projects?.map((p, i) => (
             <SidebarMenuItem key={p.id}>
               <SidebarMenuButton
