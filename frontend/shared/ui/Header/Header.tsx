@@ -39,9 +39,21 @@ export default function Header() {
             <HeaderIconButton icon={Star} label='Favorite' />
             <HeaderIconButton icon={Share2} label='Share' />
             {isDark ? (
-              <HeaderIconButton icon={Sun} label='Sun' onClick={toggleTheme} />
+              <HeaderIconButton
+                icon={Sun}
+                label='Sun'
+                onClick={toggleTheme}
+                aria-label='Toggle theme'
+                className='flex items-center justify-center dark:flex'
+              />
             ) : (
-              <HeaderIconButton icon={Moon} label='Moon' onClick={toggleTheme} />
+              <HeaderIconButton
+                icon={Moon}
+                label='Moon'
+                onClick={toggleTheme}
+                aria-label='Toggle theme'
+                className='h-4 w-4 dark:hidden'
+              />
             )}
 
             <Popover open={isOpenNotification} onOpenChange={setIsOpenNotification}>

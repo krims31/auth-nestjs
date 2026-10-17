@@ -1,33 +1,36 @@
 'use client'
 
-import { createContext, ReactNode, useEffect, useMemo, useState } from 'react'
-import { ThemeContextType } from './interface/ThemeContextType'
+import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 
-export const ThemeContext = createContext<ThemeContextType | null>(null)
+type Theme = 'light' | 'dark'
 
 interface ThemeProviderProps {
   children: ReactNode
 }
+const STORAGE_KEY = 'app-color-theme'
+
+export const ThemeContext = createContext<{
+  theme: Theme
+  setTheme: (t: Theme) => void
+  toggleTheme: () => void
+} | null>(null)
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<string>(() => {
+  const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('app-color-theme') || 'light'
+      return localStorage.getItem(STORAGE_KEY) === 'dark' ? 'dark' : 'light'
     }
     return 'light'
   })
 
   useEffect(() => {
-    localStorage.setItem('app-color-theme', theme)
-
-    document.documentElement.setAttribute('dark-theme', theme)
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    localStorage.setItem(STORAGE_KEY, theme)
   }, [theme])
 
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
-  }
+  const toggleTheme = useCallback(() => setTheme(t => (t === 'light' ? 'dark' : 'light')), [])
 
-  const value = useMemo(() => ({ theme, setTheme, toggleTheme }), [theme])
+  const value = useMemo(() => ({ theme, setTheme, toggleTheme }), [theme, toggleTheme])
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }

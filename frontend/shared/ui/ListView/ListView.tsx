@@ -14,9 +14,9 @@ export default function ListView() {
                 border-b-2 border-b-transparent
                 transition-colors duration-200
                 top-5
-                text-zinc-950
+                text-foreground
                 hover:border-b-blue-500
-                ${view === 'kanban' ? 'border-b-blue-500 bg-blue-50/50' : ''}
+                ${view === 'list' ? 'border-b-blue-500 bg-blue-500/10' : ''}
               `}
           >
             List View

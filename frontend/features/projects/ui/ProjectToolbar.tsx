@@ -33,13 +33,15 @@ export default function ProjectToolbar() {
       <div className='flex items-center gap-3 mb-2'>
         <Image
           priority={true}
-          src='/logo.jpeg'
+          src='/TaskFlow.png'
           width={40}
           height={40}
           className='rounded'
           alt='Project icon'
         />
-        <h1 className='text-2xl text-slate-800 drop-shadow-sm'>{currentProject?.title}</h1>
+        <h1 className='text-2xl text-slate-800 drop-shadow-sm dark:text-white'>
+          {currentProject?.title}
+        </h1>
       </div>
 
       <div className='flex items-center justify-between mb-2'>
@@ -67,10 +69,10 @@ export default function ProjectToolbar() {
           <div className='mt-10'>
             <Button
               onClick={() => setIsTaskDialogOpen(true)}
-              className='flex items-center justify-center gap-2'
+              className='flex items-center justify-center gap-2 dark:bg-black'
             >
               <Plus className='h-4 w-4 text-white' />
-              <span>Create Task</span>
+              <span className='dark:text-white'>Create Task</span>
             </Button>
           </div>
           <Dialog open={isTaskDialogOpen} onOpenChange={setIsTaskDialogOpen}>
