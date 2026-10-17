@@ -35,6 +35,7 @@ export default function InputPassword({
         <button
           type='button'
           onClick={() => setVisible(!visible)}
+          aria-label='Password'
           className='relative top-6.5 left-87'
         >
           {visible ? <EyeOff size={20} /> : <Eye size={20} />}
