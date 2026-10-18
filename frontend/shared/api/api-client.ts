@@ -1,6 +1,10 @@
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'
-
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ??
+  (process.env.NODE_ENV === 'production'
+    ? '/api'
+    : 'http://localhost:3000/api')
+    
 export default async function ApiClient<T>(
   endpoint: string,
   options?: { method?: string; body?: Record<string, unknown>; auth?: boolean }
