@@ -1,8 +1,8 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import 'dotenv/config';
-import 'reflect-metadata';
-import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common'
+import { NestFactory } from '@nestjs/core'
+import 'dotenv/config'
+import 'reflect-metadata'
+import { AppModule } from './app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,6 +19,9 @@ async function bootstrap() {
     origin: 'http://localhost:3001',
     credentials: true,
   });
+
+  app.setGlobalPrefix('api');
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap().catch((err) => {

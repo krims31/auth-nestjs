@@ -1,3 +1,6 @@
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'
+
 export default async function ApiClient<T>(
   endpoint: string,
   options?: { method?: string; body?: Record<string, unknown>; auth?: boolean }
@@ -18,7 +21,7 @@ export default async function ApiClient<T>(
   }
 
   // make the request
-  const response = await fetch('http://localhost:3000' + endpoint, {
+  const response = await fetch(`${API_URL}${endpoint}`, {
     method: options?.method || 'GET',
     headers,
     body: options?.body ? JSON.stringify(options.body) : undefined
