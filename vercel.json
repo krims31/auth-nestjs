@@ -8,7 +8,7 @@
       "buildCommand": "npm run build",
       "functions": {
         "src/main.ts": {
-          "includeFiles": "node_modules/**"
+          "includeFiles": "node_modules/**\nprisma/schema.prisma"
         }
       }
     },
