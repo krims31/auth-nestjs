@@ -3,9 +3,7 @@
   "services": {
     "backend": {
       "root": "backend",
-      "framework": "nestjs",
-      "installCommand": "npm ci",
-      "buildCommand": "npm run build"
+      "framework": "nestjs"
     },
     "frontend": {
       "root": "frontend",
