@@ -1,12 +1,12 @@
-import { ValidationPipe } from '@nestjs/common'
-import { NestFactory } from '@nestjs/core'
-import 'dotenv/config'
-import 'reflect-metadata'
-import { AppModule } from './app.module'
+import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import 'dotenv/config';
+import 'reflect-metadata';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -14,12 +14,12 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  
+
   const allowedOrigins = [
     'http://localhost:3001',
     'https://auth-nestjs-eta.vercel.app',
-  ]
-  
+  ];
+
   app.enableCors({
     origin: allowedOrigins,
     credentials: true,
