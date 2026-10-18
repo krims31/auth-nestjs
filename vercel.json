@@ -3,14 +3,10 @@
   "services": {
     "backend": {
       "root": "backend",
-      "framework": "nestjs",
+      "framework": "node",
       "installCommand": "npm ci --include=dev",
       "buildCommand": "npm run build",
-      "functions": {
-        "dist/main.js": {
-          "includeFiles": "node_modules/**\nprisma/schema.prisma"
-        }
-      }
+      "entrypoint": "dist/index.js"
     },
     "frontend": {
       "root": "frontend",
