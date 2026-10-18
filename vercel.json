@@ -5,7 +5,12 @@
       "root": "backend",
       "framework": "nestjs",
       "installCommand": "npm ci --include=dev",
-      "buildCommand": "npm run build"
+      "buildCommand": "npm run build",
+      "functions": {
+        "src/main.ts": {
+          "includeFiles": "node_modules/**"
+        }
+      }
     },
     "frontend": {
       "root": "frontend",
