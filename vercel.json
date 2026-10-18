@@ -1,26 +1,37 @@
 {
-  "version": 2,
-  "builds": [
+  "$schema": "https://vercel.sh",
+  "services": {
+    "backend": {
+      "root": "backend",
+      "framework": "nestjs",
+      "installCommand": "npm ci --include=dev",
+      "buildCommand": "npm run build"
+    },
+    "frontend": {
+      "root": "frontend",
+      "framework": "nextjs",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "backend",
+          "format": "url",
+          "env": "BACKEND_URL"
+        }
+      ]
+    }
+  },
+  "rewrites": [
     {
-      "src": "backend/src/index.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["backend/node_modules/**", "backend/prisma/schema.prisma"]
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "backend"
       }
     },
     {
-      "src": "frontend/package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "source": "/api/(.*)",
-      "destination": "backend/src/index.ts"
-    },
-    {
       "source": "/(.*)",
-      "destination": "frontend/$1"
+      "destination": {
+        "service": "frontend"
+      }
     }
   ]
 }
