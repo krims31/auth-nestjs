@@ -8,25 +8,30 @@ export default function CreateTaskForm({ projectId }: { projectId: string }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
+        {/* Title input */}
         <InputProject
           registration={register('title')}
-          label='Title'
-          placeholder='Title'
+          label="Title"
+          placeholder="Title"
           error={errors.title?.message}
         />
         {serverError && (
-          <span className='text-red-500 text-sm font-mono flex items-center gap-1'>
+          <span className="text-red-500 text-sm font-mono flex items-center gap-1">
             <AlertCircle size={14} />
             {serverError}
           </span>
         )}
-        <button type='submit'>
-          <span className='text-sm font-mono border rounded-lg p-2 bg-black text-white outline-none ml-60'>
+
+        {/* Create task button */}
+        <button type="submit">
+          <span className="text-sm font-mono border rounded-lg p-2 bg-black text-white outline-none ml-60">
             Create Task
           </span>
         </button>
-        <button type='submit'>
-          <span className='text-sm font-mono border rounded-lg p-2 text-gray-500 outline-none ml-40 relative bottom-5'>
+
+        {/* Cancel button */}
+        <button type="submit">
+          <span className="text-sm font-mono border rounded-lg p-2 text-gray-500 outline-none ml-40 relative bottom-5">
             Cancel
           </span>
         </button>
