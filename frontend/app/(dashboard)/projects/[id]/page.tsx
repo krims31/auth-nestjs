@@ -16,7 +16,9 @@ export default function ProjectId() {
     projectId,
     todoTasks,
     doneTasks,
-    inProgressTasks
+    inProgressTasks,
+    handleDragStart,
+    handleDragCancel
   } = useDragEnd()
 
   return (
@@ -32,7 +34,13 @@ export default function ProjectId() {
       {error instanceof Error && <span>{error.message}</span>}
 
       {!isPending && !error && (
-        <DndContext sensors={sensors} collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCorners}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+          onDragCancel={handleDragCancel}
+        >
           <div className='flex gap-4 items-start overflow-x-auto pb-4 relative bottom-5'>
             <TaskColumn projectId={projectId} status='TODO' tasks={todoTasks} />
             <TaskColumn projectId={projectId} status='IN_PROGRESS' tasks={inProgressTasks} />
