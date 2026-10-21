@@ -1,7 +1,16 @@
-import { DragEndEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
+import {
+  DragEndEvent,
+  DragStartEvent,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors
+} from '@dnd-kit/core'
 
 import { sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import { useParams } from 'next/navigation'
+import { useCallback, useState } from 'react'
+import type { Task } from '../types/TaskType'
 import { TaskStatus } from '../types/TaskType'
 import useTask from './useTask'
 import useUpdateTaskStatus from './useUpdateTaskStatus'
@@ -12,42 +21,68 @@ export default function useDragEnd() {
   const { isPending, error, todoTasks, inProgressTasks, doneTasks } = useTask(projectId)
   const { updateStatus } = useUpdateTaskStatus(projectId)
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates
-    })
+  const [isActiveTask, setIsActiveTask] = useState<Task | null>(null)
+
+  const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 3 } })
+
+  const keyboardSensor = useSensor(KeyboardSensor, {
+    coordinateGetter: sortableKeyboardCoordinates
+  })
+
+  const sensors = useSensors(pointerSensor, keyboardSensor)
+
+  const handleDragStart = useCallback(
+    (event: DragStartEvent) => {
+      const id = String(event.active.id)
+
+      const task =
+        todoTasks?.find(t => t.id === id) ??
+        inProgressTasks?.find(t => t.id === id) ??
+        doneTasks?.find(t => t.id === id) ??
+        null
+
+      setIsActiveTask(task)
+    },
+    [todoTasks, inProgressTasks, doneTasks]
   )
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event
-    if (!over || active.id === over.id) return
+  const handleDragCancel = useCallback(() => setIsActiveTask(null), [])
 
-    const taskId = String(active.id)
+  const handleDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      setIsActiveTask(null)
 
-    const statuses: TaskStatus[] = ['TODO', 'IN_PROGRESS', 'DONE']
+      const { active, over } = event
+      if (!over || active.id === over.id) return
 
-    const targetStatuses = statuses.includes(String(over.id) as TaskStatus)
-      ? (String(over.id) as TaskStatus)
-      : (over.data.current?.status as TaskStatus | undefined)
+      const statuses: TaskStatus[] = ['TODO', 'IN_PROGRESS', 'DONE']
+      const overId = String(over.id)
 
-    if (!targetStatuses) return
+      const targetStatus = statuses.includes(overId as TaskStatus)
+        ? (overId as TaskStatus)
+        : (over.data.current?.status as TaskStatus | undefined)
 
-    const currentStatus = active.data.current?.status as TaskStatus | undefined
+      if (!targetStatus) return
 
-    if (currentStatus === targetStatuses) return
+      const currentStatus = active.data.current?.status as TaskStatus | undefined
+      if (currentStatus === targetStatus) return
 
-    updateStatus(taskId, targetStatuses)
-  }
+      updateStatus(String(active.id), targetStatus)
+    },
+    [updateStatus]
+  )
 
   return {
     projectId,
+    isActiveTask,
+    handleDragStart,
+    handleDragCancel,
     handleDragEnd,
     sensors,
     isPending,
-    todoTasks,
     error,
-    doneTasks,
-    inProgressTasks
+    todoTasks,
+    inProgressTasks,
+    doneTasks
   }
 }
