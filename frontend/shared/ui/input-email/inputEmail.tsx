@@ -24,7 +24,7 @@ export default function InputEmail({
           type='email'
           placeholder='Email'
           {...registration}
-          className='relative top-20 left-10 font-mono w-85!'
+          className='relative top-20 left-10 z-10 font-mono w-85!'
         />
         {error && (
           <span className='text-red-500 text-sm font-mono flex items-center gap-1'>
