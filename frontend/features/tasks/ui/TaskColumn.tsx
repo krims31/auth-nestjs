@@ -16,9 +16,10 @@ export default function TaskColumn({ projectId, status, tasks = [], onAdd }: Tas
   return (
     <div
       ref={setNodeRef}
-      className={`flex w-80 shrink-0 flex-col gap-3 rounded-xl bg-slate-100 p-3 transition ${
-        isOver ? 'ring-2 ring-sky-400 bg-sky-50/60' : ''
-      }`}
+      className={`flex w-80
+       dark:bg-gray-500/30 shrink-0 flex-col gap-3 rounded-xl bg-slate-100 p-3 transition ${
+         isOver ? 'ring-2 ring-sky-400 bg-sky-50/60' : ''
+       }`}
     >
       {/* Header */}
       <div
