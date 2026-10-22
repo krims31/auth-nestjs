@@ -5,8 +5,17 @@ import { TaskColumnProps } from '../interfaces/TaskColumnProps'
 import type { TaskStatus } from '../types/TaskType'
 import { STATUS_CONFIG } from '../types/TaskType'
 import TaskItem from './TaskItem'
+interface ExtendedTaskColumnProps extends TaskColumnProps {
+  onDeleteTask: (id: string) => void
+}
 
-export default function TaskColumn({ projectId, status, tasks = [], onAdd }: TaskColumnProps) {
+export default function TaskColumn({
+  projectId,
+  status,
+  tasks = [],
+  onAdd,
+  onDeleteTask
+}: ExtendedTaskColumnProps) {
   const config = STATUS_CONFIG[status as TaskStatus]
 
   const { setNodeRef, isOver } = useDroppable({ id: status })
@@ -46,7 +55,7 @@ export default function TaskColumn({ projectId, status, tasks = [], onAdd }: Tas
       <SortableContext items={tasks.map(t => t.id)} strategy={verticalListSortingStrategy}>
         <ul className='flex min-h-80 flex-1 flex-col gap-2'>
           {tasks.map(task => (
-            <TaskItem key={task.id} task={task} projectId={projectId} />
+            <TaskItem key={task.id} task={task} projectId={projectId} onDelete={onDeleteTask} />
           ))}
 
           {/* Empty state / hint by moved */}

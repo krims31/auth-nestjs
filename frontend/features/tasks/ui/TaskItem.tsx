@@ -1,10 +1,21 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { AlertCircle } from 'lucide-react'
+import { AlertCircle, Ellipsis, Trash2 } from 'lucide-react'
+import { Button } from '../../../components/ui/button'
 import useUpdateTaskStatus from '../hooks/useUpdateTaskStatus'
 import { TaskItemProps } from '../interfaces/TaskItemProps'
 
-export default function TaskItem({ task, projectId }: TaskItemProps) {
+interface ExtendTaskItemProps extends TaskItemProps {
+  onDelete: (id: string) => void
+}
+
+export default function TaskItem({ task, projectId, onDelete }: ExtendTaskItemProps) {
   const { serverError } = useUpdateTaskStatus(projectId)
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -43,6 +54,22 @@ export default function TaskItem({ task, projectId }: TaskItemProps) {
             {task.title}
           </p>
         </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Button variant='ghost' className='h-8 w-8 p-0 rounded-full'>
+              <Ellipsis className='shrink-0 text-gray-500' size={20} />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align='end' className='w-40'>
+            <DropdownMenuItem
+              onClick={() => onDelete(task.id)}
+              className='text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950/50 cursor-pointer'
+            >
+              <Trash2 className='mr-2 h-4 w-4' />
+              <span>Delete</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {serverError && (
