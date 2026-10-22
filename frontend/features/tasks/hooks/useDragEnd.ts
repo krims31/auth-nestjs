@@ -21,14 +21,18 @@ export default function useDragEnd() {
   const { isPending, error, todoTasks, inProgressTasks, doneTasks } = useTask(projectId)
   const { updateStatus } = useUpdateTaskStatus(projectId)
 
+  // Active Task
   const [isActiveTask, setIsActiveTask] = useState<Task | null>(null)
 
+  // Pointer
   const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 3 } })
 
+  // Keyboard
   const keyboardSensor = useSensor(KeyboardSensor, {
     coordinateGetter: sortableKeyboardCoordinates
   })
 
+  // main a sensors
   const sensors = useSensors(pointerSensor, keyboardSensor)
 
   const handleDragStart = useCallback(
