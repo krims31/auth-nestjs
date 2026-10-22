@@ -21,6 +21,13 @@ export default function useDragEnd() {
   const { isPending, error, todoTasks, inProgressTasks, doneTasks } = useTask(projectId)
   const { updateStatus } = useUpdateTaskStatus(projectId)
 
+  const [task, setTasks] = useState<Task[]>([])
+
+  // Delete Task
+  const deleteTask = (taskId: string) => {
+    setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId))
+  }
+
   // Active Task
   const [isActiveTask, setIsActiveTask] = useState<Task | null>(null)
 
@@ -87,6 +94,7 @@ export default function useDragEnd() {
     error,
     todoTasks,
     inProgressTasks,
-    doneTasks
+    doneTasks,
+    deleteTask
   }
 }
