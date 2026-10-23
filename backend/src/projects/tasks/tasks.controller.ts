@@ -19,7 +19,7 @@ import { TasksService } from './tasks.service';
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
-  // Создать задачу
+  // Create a task.
   @Post()
   async create(
     @Body() dto: CreateTaskDto,
@@ -29,7 +29,7 @@ export class TasksController {
     return await this.tasksService.create(dto, projectId, user.id);
   }
 
-  // Получить все задачи проекта
+  // Get all a tasks the project.
   @Get()
   async findAllTasks(
     @Param('projectId') projectId: string,
@@ -38,7 +38,7 @@ export class TasksController {
     return await this.tasksService.findAllByProject(projectId, user.id);
   }
 
-  // Получить одну задачу проекта
+  // Get one a tasks the project.
   @Get(':id')
   async findOneTask(
     @Param('id') id: string,
@@ -48,7 +48,7 @@ export class TasksController {
     return await this.tasksService.findOne(id, projectId, user.id);
   }
 
-  // Обновить задачу
+  // Update a task.
   @Patch(':id')
   async updateTask(
     @Param('id') id: string,
@@ -59,7 +59,7 @@ export class TasksController {
     return await this.tasksService.update(id, projectId, user.id, dto);
   }
 
-  // Удалить задачу
+  // Delete a task.
   @Delete(':id')
   async delete(
     @Param('projectId') projectId: string,

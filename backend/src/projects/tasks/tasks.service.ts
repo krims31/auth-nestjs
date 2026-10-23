@@ -11,6 +11,7 @@ export class TasksService {
     private readonly projectsService: ProjectsService,
   ) {}
 
+  // Create a tasks.
   async create(dto: CreateTaskDto, projectId: string, ownerId: string) {
     await this.projectsService.findOne(projectId, ownerId);
     return await this.prisma.task.create({
@@ -21,11 +22,13 @@ export class TasksService {
     });
   }
 
+  // Find all a tasks the project.
   async findAllByProject(projectId: string, ownerId: string) {
     await this.projectsService.findOne(projectId, ownerId);
     return await this.prisma.task.findMany({ where: { projectId } });
   }
 
+  // Find one a tasks the project.
   async findOne(id: string, projectId: string, ownerId: string) {
     await this.projectsService.findOne(projectId, ownerId);
     const task = await this.prisma.task.findFirst({
@@ -38,6 +41,7 @@ export class TasksService {
     return task;
   }
 
+  // Update a tasks the project.
   async update(
     id: string,
     projectId: string,
@@ -52,6 +56,7 @@ export class TasksService {
     });
   }
 
+  // Delete a tasks the project.
   async delete(id: string, projectId: string, ownerId: string) {
     await this.findOne(id, projectId, ownerId);
 
