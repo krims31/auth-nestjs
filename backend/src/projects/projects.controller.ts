@@ -28,13 +28,13 @@ export class ProjectsController {
     return await this.projectsService.create(dto, user.id);
   }
 
-  // Получение всех проектов пользователя
+  // Get all a projects the user.
   @Get()
   async findAll(@CurrentUser() user: Express.User) {
     return await this.projectsService.findAllByUser(user.id);
   }
 
-  // Получить один проект пользователя
+  // Get one a project the user.
   @Get(':id')
   async findOneProject(
     @Param('id') id: string,
@@ -43,7 +43,7 @@ export class ProjectsController {
     return await this.projectsService.findOne(id, user.id);
   }
 
-  // Обновить проект пользователя
+  // Update a project the user.
   @Patch(':id')
   async updateProject(
     @Param('id')
@@ -55,7 +55,7 @@ export class ProjectsController {
     return await this.projectsService.update(id, user.id, dto);
   }
 
-  // Удаление конкретного проекта пользователя
+  // Delete a specific project the user.
   @Delete(':id')
   async delete(
     @Param('id')
