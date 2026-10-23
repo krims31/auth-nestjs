@@ -8,7 +8,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  // Создание пользователя в БД
+  // Create a user in the DataBase.
   async create(dto: CreateDto) {
     const passwordHash: string = await bcrypt.hash(dto.password, 10);
 
@@ -37,7 +37,7 @@ export class UsersService {
     }
   }
 
-  // Cохранение хеш refresh-токена в базе
+  // Save a hash refresh-token in the data base.
   async updateRefreshToken(userId: string, refreshToken: string) {
     const refreshTokenHash = await bcrypt.hash(refreshToken, 10);
 
@@ -47,7 +47,7 @@ export class UsersService {
     });
   }
 
-  // Очистка хеш refresh-токена
+  // Clear a hash refresh-token.
   async clearRefreshToken(userId: string) {
     return this.prisma.user.update({
       where: { id: userId },
@@ -62,12 +62,12 @@ export class UsersService {
     });
   }
 
-  // Поиск пользователя по id
+  // Find a user by id.
   async findById(id: string) {
     return await this.prisma.user.findUnique({ where: { id } });
   }
 
-  // Поиск пользователя по email
+  // Find a user by email.
   async findByEmail(email: string) {
     return await this.prisma.user.findUnique({ where: { email } });
   }
