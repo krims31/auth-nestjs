@@ -14,6 +14,7 @@ export async function createTasks(projectId: string, data: { title: string }) {
   })
 }
 
+// deleteTask async function for the projects/projectId/tasks/taskId
 export async function deleteTask(projectId: string, taskId: string) {
   return ApiClient(`/projects/${projectId}/tasks/${taskId}`, {
     method: 'DELETE'
