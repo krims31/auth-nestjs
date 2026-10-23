@@ -12,6 +12,7 @@ import { useParams } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import type { Task } from '../types/TaskType'
 import { TaskStatus } from '../types/TaskType'
+import useDeleteTask from './useDeleteTask'
 import useTask from './useTask'
 import useUpdateTaskStatus from './useUpdateTaskStatus'
 export default function useDragEnd() {
@@ -21,12 +22,8 @@ export default function useDragEnd() {
   const { isPending, error, todoTasks, inProgressTasks, doneTasks } = useTask(projectId)
   const { updateStatus } = useUpdateTaskStatus(projectId)
 
-  const [task, setTasks] = useState<Task[]>([])
-
   // Delete Task
-  const deleteTask = (taskId: string) => {
-    setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId))
-  }
+  const { deleteTask } = useDeleteTask(projectId)
 
   // Active Task
   const [isActiveTask, setIsActiveTask] = useState<Task | null>(null)
