@@ -10,7 +10,6 @@ import { AlertCircle, Ellipsis, Trash2 } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
 import useUpdateTaskStatus from '../hooks/useUpdateTaskStatus'
 import { TaskItemProps } from '../interfaces/TaskItemProps'
-
 interface ExtendTaskItemProps extends TaskItemProps {
   onDelete: (id: string) => void
 }
@@ -55,11 +54,13 @@ export default function TaskItem({ task, projectId, onDelete }: ExtendTaskItemPr
           </p>
         </div>
         <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Button variant='ghost' className='h-8 w-8 p-0 rounded-full'>
-              <Ellipsis className='shrink-0 text-gray-500' size={20} />
-            </Button>
-          </DropdownMenuTrigger>
+          <DropdownMenuTrigger
+            render={
+              <Button variant='ghost' className='h-8 w-8 p-0 rounded-full'>
+                <Ellipsis className='shrink-0 text-gray-500' size={20} />
+              </Button>
+            }
+          />
           <DropdownMenuContent align='end' className='w-40'>
             <DropdownMenuItem
               onClick={() => onDelete(task.id)}
