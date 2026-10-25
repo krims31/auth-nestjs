@@ -15,11 +15,14 @@ import { TaskStatus } from '../types/TaskType'
 import useDeleteTask from './useDeleteTask'
 import useTask from './useTask'
 import useUpdateTaskStatus from './useUpdateTaskStatus'
+
 export default function useDragEnd() {
   const params = useParams()
   const projectId = params.id as string
 
   const { isPending, error, todoTasks, inProgressTasks, doneTasks } = useTask(projectId)
+
+  // Update by projectId status.
   const { updateStatus } = useUpdateTaskStatus(projectId)
 
   // Delete Task
@@ -36,9 +39,10 @@ export default function useDragEnd() {
     coordinateGetter: sortableKeyboardCoordinates
   })
 
-  // main a sensors
+  // Main a sensors
   const sensors = useSensors(pointerSensor, keyboardSensor)
 
+  // Find the task by ID status lists.
   const handleDragStart = useCallback(
     (event: DragStartEvent) => {
       const id = String(event.active.id)
@@ -54,6 +58,7 @@ export default function useDragEnd() {
     [todoTasks, inProgressTasks, doneTasks]
   )
 
+  // Clear the active task state.
   const handleDragCancel = useCallback(() => setIsActiveTask(null), [])
 
   const handleDragEnd = useCallback(
@@ -64,6 +69,7 @@ export default function useDragEnd() {
       if (!over || active.id === over.id) return
 
       const statuses: TaskStatus[] = ['TODO', 'IN_PROGRESS', 'DONE']
+
       const overId = String(over.id)
 
       const targetStatus = statuses.includes(overId as TaskStatus)
