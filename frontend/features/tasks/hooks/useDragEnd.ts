@@ -1,29 +1,27 @@
 import { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
 
-import { useParams } from 'next/navigation'
-import { useCallback, useState } from 'react'
-import type { Task } from '../types/TaskType'
+import { useCallback } from 'react'
 import { TaskStatus } from '../types/TaskType'
-import useDeleteTask from './useDeleteTask'
-import useDndSensors from './useDndSensors'
-import useTask from './useTask'
-import useUpdateTaskStatus from './useUpdateTaskStatus'
+import useProjectId from './useProjectId'
 
 const statuses: TaskStatus[] = ['TODO', 'IN_PROGRESS', 'DONE']
 
 export default function useDragEnd() {
-  const params = useParams()
-  const projectId = params.id as string
-
-  const { isPending, error, todoTasks, inProgressTasks, doneTasks } = useTask(projectId)
-
-  const { updateStatus } = useUpdateTaskStatus(projectId)
-
-  const { deleteTask } = useDeleteTask(projectId)
-
-  const [isActiveTask, setIsActiveTask] = useState<Task | null>(null)
-
-  const { sensors, keyboardSensor, pointerSensor } = useDndSensors()
+  const {
+    isPending,
+    error,
+    todoTasks,
+    projectId,
+    inProgressTasks,
+    doneTasks,
+    updateStatus,
+    deleteTask,
+    isActiveTask,
+    setIsActiveTask,
+    sensors,
+    keyboardSensor,
+    pointerSensor
+  } = useProjectId()
 
   // Find the task by ID status lists.
   const handleDragStart = useCallback(
@@ -67,7 +65,6 @@ export default function useDragEnd() {
   )
 
   return {
-    projectId,
     isActiveTask,
     handleDragStart,
     handleDragCancel,
@@ -80,6 +77,7 @@ export default function useDragEnd() {
     todoTasks,
     inProgressTasks,
     doneTasks,
+    projectId,
     deleteTask
   }
 }
