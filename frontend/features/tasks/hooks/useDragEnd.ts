@@ -9,6 +9,8 @@ import useDndSensors from './useDndSensors'
 import useTask from './useTask'
 import useUpdateTaskStatus from './useUpdateTaskStatus'
 
+const statuses: TaskStatus[] = ['TODO', 'IN_PROGRESS', 'DONE']
+
 export default function useDragEnd() {
   const params = useParams()
   const projectId = params.id as string
@@ -39,7 +41,6 @@ export default function useDragEnd() {
     [todoTasks, inProgressTasks, doneTasks]
   )
 
-  // Clear the active task state.
   const handleDragCancel = useCallback(() => setIsActiveTask(null), [])
 
   const handleDragEnd = useCallback(
@@ -48,8 +49,6 @@ export default function useDragEnd() {
 
       const { active, over } = event
       if (!over || active.id === over.id) return
-
-      const statuses: TaskStatus[] = ['TODO', 'IN_PROGRESS', 'DONE']
 
       const overId = String(over.id)
 
