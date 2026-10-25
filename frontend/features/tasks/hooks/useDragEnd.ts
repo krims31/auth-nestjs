@@ -1,18 +1,11 @@
-import {
-  DragEndEvent,
-  DragStartEvent,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors
-} from '@dnd-kit/core'
+import { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
 
-import { sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import { useParams } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import type { Task } from '../types/TaskType'
 import { TaskStatus } from '../types/TaskType'
 import useDeleteTask from './useDeleteTask'
+import useDndSensors from './useDndSensors'
 import useTask from './useTask'
 import useUpdateTaskStatus from './useUpdateTaskStatus'
 
@@ -28,13 +21,7 @@ export default function useDragEnd() {
 
   const [isActiveTask, setIsActiveTask] = useState<Task | null>(null)
 
-  const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 3 } })
-
-  const keyboardSensor = useSensor(KeyboardSensor, {
-    coordinateGetter: sortableKeyboardCoordinates
-  })
-
-  const sensors = useSensors(pointerSensor, keyboardSensor)
+  const { sensors, keyboardSensor, pointerSensor } = useDndSensors()
 
   // Find the task by ID status lists.
   const handleDragStart = useCallback(
@@ -86,9 +73,11 @@ export default function useDragEnd() {
     handleDragStart,
     handleDragCancel,
     handleDragEnd,
-    sensors,
     isPending,
     error,
+    sensors,
+    keyboardSensor,
+    pointerSensor,
     todoTasks,
     inProgressTasks,
     doneTasks,
