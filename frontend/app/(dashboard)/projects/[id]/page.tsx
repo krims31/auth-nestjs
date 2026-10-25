@@ -7,7 +7,6 @@ import ProjectToolbar from '../../../../features/projects/ui/ProjectToolbar'
 import useDragEnd from '../../../../features/tasks/hooks/useDragEnd'
 
 import TaskColumn from '../../../../features/tasks/ui/TaskColumn'
-
 export default function ProjectId() {
   const {
     sensors,
