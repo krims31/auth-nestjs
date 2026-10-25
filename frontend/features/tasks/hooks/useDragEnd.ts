@@ -22,24 +22,18 @@ export default function useDragEnd() {
 
   const { isPending, error, todoTasks, inProgressTasks, doneTasks } = useTask(projectId)
 
-  // Update by projectId status.
   const { updateStatus } = useUpdateTaskStatus(projectId)
 
-  // Delete Task
   const { deleteTask } = useDeleteTask(projectId)
 
-  // Active Task
   const [isActiveTask, setIsActiveTask] = useState<Task | null>(null)
 
-  // Pointer
   const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 3 } })
 
-  // Keyboard
   const keyboardSensor = useSensor(KeyboardSensor, {
     coordinateGetter: sortableKeyboardCoordinates
   })
 
-  // Main a sensors
   const sensors = useSensors(pointerSensor, keyboardSensor)
 
   // Find the task by ID status lists.
