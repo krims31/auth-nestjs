@@ -1,18 +1,28 @@
-import { useQuery } from '@tanstack/react-query'
-import { getProjects } from '../api/projectApi'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { deleteProject, getProjects } from '../api/projectApi'
 export default function useProject() {
-	const {
-		isPending,
-		data: project,
-		error
-	} = useQuery({
-		queryKey: ['projects'],
-		queryFn: getProjects
-	})
+  const queryClient = useQueryClient()
+  const {
+    isPending,
+    data: project,
+    error
+  } = useQuery({
+    queryKey: ['projects'],
+    queryFn: getProjects
+  })
 
-	return {
-		project,
-		isPending,
-		error
-	}
+  const deleteMutation = useMutation({
+    mutationFn: (id: string) => deleteProject(id),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['projects'] })
+    }
+  })
+
+  return {
+    project,
+    isPending,
+    error,
+    deleteProject: deleteMutation.mutateAsync,
+    isDeleting: deleteMutation.isPending
+  }
 }
