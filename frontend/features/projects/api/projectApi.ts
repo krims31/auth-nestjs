@@ -13,6 +13,11 @@ export async function getProjects(): Promise<Project[]> {
   return ApiClient<Project[]>('/projects')
 }
 
+// Delete projects
+export async function deleteProject(id: string) {
+  return ApiClient<Project>(`/projects/${id}`, { method: 'DELETE' })
+}
+
 // Create projects
 export async function createProject(data: {
   title: string
