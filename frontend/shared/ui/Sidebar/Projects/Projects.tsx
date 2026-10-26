@@ -1,28 +1,71 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle
+} from '@/components/ui/dialog'
 import {
   SidebarGroup,
   SidebarGroupAction,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
+  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem
 } from '@/components/ui/sidebar'
-import { Plus } from 'lucide-react'
+import { Plus, Trash2 } from 'lucide-react'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import useProject from '../../../../features/projects/hooks/useProject'
 import CreateProjectForm from '../../../../features/projects/ui/CreateProjectForm'
-const COLORS = ['bg-sky-500', 'bg-amber-500', 'bg-emerald-500', 'bg-violet-500', 'bg-rose-500']
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
+} from '../../../../src/components/ui/alert-dialog'
+
+const COLORS = [
+  'bg-sky-500',
+  'bg-amber-500',
+  'bg-emerald-500',
+  'bg-violet-500',
+  'bg-rose-500'
+]
 
 export default function Projects() {
-  const { project: projects } = useProject()
+  const { project: projects, isDeleting, deleteProject } = useProject()
 
   const params = useParams()
   const activeId = params.id as string | undefined
+  const router = useRouter()
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const [isDelete, setIsDelete] = useState<{
+    id: string
+    title: string
+  } | null>(null)
+
+  const handleDelete = async () => {
+    if (!isDelete) return
+
+    try {
+      await deleteProject(isDelete.id)
+
+      if (isDelete.id === activeId) router.replace('/')
+
+      setIsDelete(null)
+    } catch (err) {
+      console.error('Not success delete project.', err)
+    }
+  }
 
   return (
     <SidebarGroup className="flex-1 min-h-0 relative top-10">
@@ -56,10 +99,20 @@ export default function Projects() {
                 <span
                   className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-xs font-semibold text-white ring-1 ring-white/10 ${COLORS[i % COLORS.length]}`}
                 >
-                  {p.title.charAt(0).toUpperCase()}
+                  {(p.title?.[0] ?? '?').toUpperCase()}
                 </span>
                 <span className="truncate">{p.title}</span>
               </SidebarMenuButton>
+
+              <SidebarMenuAction
+                showOnHover
+                aria-label={`Delete project ${p.title}`}
+                title="Delete project"
+                onClick={() => setIsDelete({ id: p.id, title: p.title })}
+                className="text-sidebar-foreground/70 hover:text-destructive"
+              >
+                <Trash2 />
+              </SidebarMenuAction>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
@@ -74,9 +127,39 @@ export default function Projects() {
           <DialogHeader>
             <DialogTitle>New Project</DialogTitle>
           </DialogHeader>
-          <CreateProjectForm /* onSuccess={() => setIsOpen(false)} */ />
+          <CreateProjectForm onSuccess={() => setIsOpen(false)} />
         </DialogContent>
       </Dialog>
+
+      <AlertDialog
+        open={!!isDelete}
+        onOpenChange={open => {
+          if (!open && !isDeleting) setIsDelete(null)
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete project?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Project «{isDelete?.title}» will delete forever. It action cannot
+              cancel.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>Отмена</AlertDialogCancel>
+            <AlertDialogAction
+              disabled={isDeleting}
+              onClick={event => {
+                event.preventDefault()
+                handleDelete()
+              }}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {isDeleting ? 'Deleting…' : 'Delete'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </SidebarGroup>
   )
 }
