@@ -8,7 +8,6 @@ import {
 import { CircleQuestionMark, Settings } from 'lucide-react'
 import Link from 'next/link'
 
-// System Items
 const systemItems = [
   { title: 'Settings', url: '/', icon: Settings },
   { title: 'Help Center', url: '/', icon: CircleQuestionMark }

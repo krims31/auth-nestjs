@@ -5,6 +5,7 @@ import { TaskColumnProps } from '../interfaces/TaskColumnProps'
 import type { TaskStatus } from '../types/TaskType'
 import { STATUS_CONFIG } from '../types/TaskType'
 import TaskItem from './TaskItem'
+
 interface ExtendedTaskColumnProps extends TaskColumnProps {
   onDeleteTask: (id: string) => void
 }
