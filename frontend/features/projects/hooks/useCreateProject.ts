@@ -9,9 +9,7 @@ type UseCreateProjectOptions = {
   onSuccess?: () => void
 }
 
-export default function useCreateProject({
-  onSuccess
-}: UseCreateProjectOptions = {}) {
+export default function useCreateProject({ onSuccess }: UseCreateProjectOptions = {}) {
   const {
     register,
     handleSubmit,
@@ -20,13 +18,10 @@ export default function useCreateProject({
     resolver: zodResolver(projectSchema)
   })
 
-  // Get query client
   const queryClient = useQueryClient()
 
-  // Server error
   const [serverError, setServerError] = useState<string | null>(null)
 
-  // Create mutation for create project
   const mutation = useMutation({
     mutationFn: createProject,
     onSuccess: () => {
@@ -35,7 +30,6 @@ export default function useCreateProject({
     }
   })
 
-  // create project
   const onSubmit = (data: ProjectFormValues) => {
     mutation.mutate(data, {
       onError: error => {
