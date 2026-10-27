@@ -4,52 +4,43 @@ import { updateTasks } from '../api/task-api'
 import { TaskStatus } from '../types/TaskType'
 
 export default function useUpdateTaskStatus(projectId: string) {
-	const queryClient = useQueryClient()
+  const queryClient = useQueryClient()
 
-	const [isDelete, setIsDelete] = useState<boolean>(false)
+  const [isDelete, setIsDelete] = useState<boolean>(false)
 
-	// Delete task
-	const deleteTask = () => {
-		if (isDelete) {
-			setIsDelete(false)
-		} else {
-			setIsDelete(true)
-		}
-	}
+  const deleteTask = () => {
+    if (isDelete) {
+      setIsDelete(false)
+    } else {
+      setIsDelete(true)
+    }
+  }
 
-	
-	const [serverError, setServerError] = useState<string | null>(null)
+  const [serverError, setServerError] = useState<string | null>(null)
 
-	const mutation = useMutation({
-		mutationFn: ({
-			taskId,
-			status
-		}: {
-			taskId: string
-			status: TaskStatus
-		}) => {
-			return updateTasks(projectId, taskId, status)
-		},
-		onSuccess: async () => {
-			await queryClient.invalidateQueries({
-				queryKey: ['tasks', projectId]
-			})
-		},
+  const mutation = useMutation({
+    mutationFn: ({ taskId, status }: { taskId: string; status: TaskStatus }) => {
+      return updateTasks(projectId, taskId, status)
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ['tasks', projectId]
+      })
+    },
 
-		onError: (error: Error) => {
-			setServerError(error.message || "Something went wrong")
-		},
+    onError: (error: Error) => {
+      setServerError(error.message || 'Something went wrong')
+    }
   })
 
-	// Update Status for tasks
-	const updateStatus = (taskId: string, status: TaskStatus) => {
-		mutation.mutate({ taskId, status })
-		return { updateStatus, serverError, isPending: mutation.isPending }
-	}
+  const updateStatus = (taskId: string, status: TaskStatus) => {
+    mutation.mutate({ taskId, status })
+    return { updateStatus, serverError, isPending: mutation.isPending }
+  }
 
-	return {
-		updateStatus,
-		deleteTask,
-		serverError
-	}
+  return {
+    updateStatus,
+    deleteTask,
+    serverError
+  }
 }
