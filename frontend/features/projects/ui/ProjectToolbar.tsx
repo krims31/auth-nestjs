@@ -27,7 +27,6 @@ export default function ProjectToolbar() {
 
   return (
     <main className='px-1 relative bottom-13'>
-      {/* Project title and Image */}
       <div className='flex items-center gap-3 mb-2'>
         <Image
           priority={true}
@@ -61,7 +60,6 @@ export default function ProjectToolbar() {
             </kbd>
           </div>
 
-          {/* Filter button */}
           <div className='mt-10'>
             <Button variant='outline' className='flex items-center gap-2'>
               <Settings2 className='h-4 w-4 text-gray-400' />
