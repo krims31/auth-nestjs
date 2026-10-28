@@ -5,13 +5,11 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from 're
 export type DeleteTarget = { id: string; title: string }
 
 type ProjectsDialogsContextValue = {
-  // create dialog
   createOpen: boolean
   openCreate: () => void
   closeCreate: () => void
   setCreateOpen: (open: boolean) => void
 
-  // delete dialog
   deleteTarget: DeleteTarget | null
   openDelete: (target: DeleteTarget) => void
   closeDelete: () => void
@@ -45,9 +43,11 @@ export function ProjectsDialogsProvider({ children }: { children: ReactNode }) {
 }
 
 export function useProjectsDialogs() {
-  const ctx = useContext(ProjectsDialogsContext)
-  if (!ctx) {
-    throw new Error('useProjectsDialogs must be used within <ProjectsDialogsProvider>')
+  const context = useContext(ProjectsDialogsContext)
+  if (!context) {
+    throw new Error(
+      'useProjectsDialogs must be used within <ProjectsDialogsProvider>'
+    )
   }
-  return ctx
+  return context
 }
