@@ -27,20 +27,26 @@ export default function DeleteAlertDialog() {
   return (
     <AlertDialog
       open={!!deleteTarget}
-      onOpenChange={open => { if (!open && !isDeleting) closeDelete() }}
+      onOpenChange={open => {
+        if (!open && !isDeleting) closeDelete()
+      }}
     >
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Delete project?</AlertDialogTitle>
           <AlertDialogDescription>
-            Project «{deleteTarget?.title}» will be deleted forever. This action cannot be undone.
+            Project «{deleteTarget?.title}» will be deleted forever. This action
+            cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             disabled={isDeleting}
-            onClick={e => { e.preventDefault(); handleDelete() }}
+            onClick={event => {
+              event.preventDefault()
+              handleDelete()
+            }}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >
             {isDeleting ? 'Deleting…' : 'Delete'}
