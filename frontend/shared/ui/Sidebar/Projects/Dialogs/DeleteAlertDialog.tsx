@@ -1,6 +1,12 @@
 import {
-  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
-  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
 } from '@/components/ui/alert-dialog'
 import { useParams, useRouter } from 'next/navigation'
 import useProject from '../../../../../features/projects/hooks/useProject'
@@ -18,7 +24,7 @@ export default function DeleteAlertDialog() {
     try {
       await deleteProject(deleteTarget.id)
       if (deleteTarget.id === activeId) router.replace('/')
-        closeDelete()
+      closeDelete()
     } catch (err) {
       console.error('Failed to delete project', err)
     }
@@ -35,8 +41,7 @@ export default function DeleteAlertDialog() {
         <AlertDialogHeader>
           <AlertDialogTitle>Delete project?</AlertDialogTitle>
           <AlertDialogDescription>
-            Project «{deleteTarget?.title}» will be deleted forever. This action
-            cannot be undone.
+            Project «{deleteTarget?.title}» will be deleted forever. This action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -47,7 +52,7 @@ export default function DeleteAlertDialog() {
               event.preventDefault()
               handleDelete()
             }}
-            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            className='bg-destructive text-destructive-foreground hover:bg-destructive/90'
           >
             {isDeleting ? 'Deleting…' : 'Delete'}
           </AlertDialogAction>
