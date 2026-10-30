@@ -48,10 +48,6 @@ export class ProjectsService {
   async delete(id: string, ownerId: string) {
     await this.findOne(id, ownerId);
 
-    return await this.prisma.$transaction([
-      this.prisma.task.deleteMany({ where: { projectId: id } }),
-
-      this.prisma.task.delete({ where: { id } }),
-    ]);
+    return await this.prisma.project.delete({ where: { id } });
   }
 }
