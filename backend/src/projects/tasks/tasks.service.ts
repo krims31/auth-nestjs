@@ -17,6 +17,9 @@ export class TasksService {
     return await this.prisma.task.create({
       data: {
         title: dto.title,
+        description: dto.description ?? null,
+        priority: dto.priority ?? 'MEDIUM',
+        dueDate: dto.dueDate ? new Date(dto.dueDate) : null,
         projectId,
       },
     });
