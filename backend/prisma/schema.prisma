@@ -8,6 +8,12 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
 enum Role {
   USER
   ADMIN
@@ -47,10 +53,16 @@ model Project {
 model Task {
   id        String     @id @default(uuid())
   title     String
+  description String?
   status    TaskStatus @default(TODO)
+  priority  Priority   @default(MEDIUM)
+  dueDate   DateTime?
+  position  Float      @default(0)
   project   Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId String
   createdAt DateTime   @default(now())
 
+
+  @@index([projectId, status])
   @@map("task")
 }
