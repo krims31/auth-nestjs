@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Home, Mail } from 'lucide-react'
 
 const items = [
-  { title: 'Home', url: '/', icon: Home },
+  { title: 'Home', url: '/kanban-board', icon: Home },
   { title: 'Inbox', url: '/404', icon: Mail }
 ]
 
