@@ -21,11 +21,17 @@ export default function CreateTaskForm({ projectId }: { projectId: string }) {
             <label className='text-sm text-slate-600 dark:text-slate-300'>Priority</label>
             <select
               {...register('priority')}
-              className='rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white'
+              className='rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-transparent dark:bg-transparent text-muted-foreground dark:text-white'
             >
-              <option value='LOW'>LOW</option>
-              <option value='MEDIUM'>MEDIUM</option>
-              <option value='HIGH'>HIGH</option>
+              <option value='LOW' className='dark:bg-transparent text-muted-foreground'>
+                LOW
+              </option>
+              <option value='MEDIUM' className='dark:bg-transparent text-muted-foreground'>
+                MEDIUM
+              </option>
+              <option value='HIGH' className='dark:bg-transparent text-muted-foreground'>
+                HIGH
+              </option>
             </select>
             {errors.priority?.message && (
               <span className='text-xs text-red-500'>{errors.priority.message}</span>
@@ -36,7 +42,7 @@ export default function CreateTaskForm({ projectId }: { projectId: string }) {
             <input
               type='date'
               {...register('dueDate')}
-              className='rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white'
+              className='rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-transparent dark:bg-transparent text-muted-foreground dark:text-white'
             />
             {errors.dueDate?.message && (
               <span className='text-xs text-red-500'>{errors.dueDate.message}</span>
@@ -51,14 +57,12 @@ export default function CreateTaskForm({ projectId }: { projectId: string }) {
           </span>
         )}
 
-        {/* Create task button */}
         <button type='submit'>
           <span className='relative top-5 text-sm font-mono border rounded-lg p-2 bg-black text-white outline-none ml-60'>
             Create Task
           </span>
         </button>
 
-        {/* Cancel button */}
         <button type='submit'>
           <span className='text-sm font-mono border rounded-lg p-2 text-gray-500 outline-none ml-40 relative bottom-0'>
             Cancel
