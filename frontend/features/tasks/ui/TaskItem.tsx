@@ -6,6 +6,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { cn } from 'cn'
 import { AlertCircle, Calendar, Ellipsis, Flag, Trash2 } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
 import { PRIORITY_LABEL, PRIORITY_STYLES, formatDate } from '../constants/priority.const'
@@ -33,12 +34,13 @@ export default function TaskItem({ task, projectId, onDelete }: ExtendTaskItemPr
     <li
       ref={setNodeRef}
       style={style}
-      className={`group flex flex-col gap-2 rounded-lg border border-slate-200 bg-white p-3 shadow-sm
-      dark:bg-zinc-950 dark:border-white transition ${
+      className={cn(
+        'group flex flex-col gap-2 rounded-lg border border-slate-200 bg-white p-3 shadow-sm transition',
+        'dark:border-white/10 dark:bg-zinc-900',
         isDragging
           ? 'border-dashed border-sky-400 bg-sky-50/60 shadow-none'
-          : 'hover:border-slate-30 dark:bg-zinc-900/40 dark:border-white/10 hover:border-slate-300 hover:shadow-md'
-      }`}
+          : 'hover:border-slate-300 hover:shadow-md'
+      )}
     >
       <div className='flex items-center justify-between gap-2'>
         {/* Task title */}
