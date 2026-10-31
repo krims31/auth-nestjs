@@ -58,13 +58,13 @@ export default function CreateTaskForm({ projectId }: { projectId: string }) {
         )}
 
         <button type='submit'>
-          <span className='relative top-5 text-sm font-mono border rounded-lg p-2 bg-black text-white outline-none ml-60'>
+          <span className='relative top-5 text-sm font-mono border rounded-lg p-2 bg-black text-white outline-none ml-60 hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200 transition duration-300 transform ease-in-out cursor-pointer'>
             Create Task
           </span>
         </button>
 
         <button type='submit'>
-          <span className='text-sm font-mono border rounded-lg p-2 text-gray-500 outline-none ml-40 relative bottom-0'>
+          <span className='text-sm font-mono border border-gray-300 dark:border-zinc-700 rounded-lg p-2 text-gray-500 hover:bg-gray-50 dark:hover:bg-zinc-800 hover:text-gray-700 dark:hover:text-gray-300 outline-none ml-40 relative bottom-0 transition duration-200 cursor-pointer'>
             Cancel
           </span>
         </button>
