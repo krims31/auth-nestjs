@@ -1,6 +1,6 @@
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import Header from '../../shared/ui/Header/Header'
-import ThemeProvider from '../../shared/ui/Header/Theme/ThemeProvider'
+import Header from '../../features/Header/Header'
+import ThemeProvider from '../../features/Header/Theme/ThemeProvider'
 import { AppSidebar } from '../../shared/ui/Sidebar/Sidebar'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
