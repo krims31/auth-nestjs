@@ -1,4 +1,6 @@
+import { Task } from '../types/TaskType'
+
 export interface TaskItemProps {
-	task: { id: string; title: string; status: string }
-	projectId: string
+  task: Task
+  projectId: string
 }
