@@ -2,7 +2,7 @@
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Bell, Moon, Share2, Star, Sun } from 'lucide-react'
-import DropDownMenuAvatar from '../DropDown/DropDownMenuAvatar'
+import DropDownMenuAvatar from '../../shared/ui/DropDown/DropDownMenuAvatar'
 import HeaderIconButton from './HeaderIconButtons'
 import useBreadcrumb from './hooks/useBreadcrumb'
 import useNotification from './hooks/useNotification'

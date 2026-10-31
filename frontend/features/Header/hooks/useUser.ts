@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import ApiClient from '../../../api/api-client'
+import ApiClient from '../../../shared/api/api-client';
 
 // Current User
 export default function useUser() {

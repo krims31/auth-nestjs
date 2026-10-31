@@ -1,5 +1,5 @@
 import { useParams, usePathname } from 'next/navigation'
-import useProject from '../../../../features/projects/hooks/useProject'
+import useProject from '../../projects/hooks/useProject'
 
 export default function useBreadcrumb() {
 	const pathname = usePathname()

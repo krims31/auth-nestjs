@@ -13,7 +13,7 @@ import { LogOutIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import useUser from '../../../features/Header/hooks/useUser'
 
-export default function DropdownMenuAvatar() {
+export default function DropDownMenuAvatar() {
   const router = useRouter()
   const { data: user } = useUser()
 
