@@ -16,6 +16,13 @@ export default function CreateTaskForm({ projectId }: { projectId: string }) {
           error={errors.title?.message}
         />
 
+        <InputProject
+          registration={register('description')}
+          label='Project Description'
+          placeholder='Project Description'
+          error={errors.description?.message}
+        />
+
         <div className='grid grid-cols-2 gap-3'>
           <div className='flex flex-col gap-1'>
             <label className='text-sm text-slate-600 dark:text-slate-300'>Priority</label>
