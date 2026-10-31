@@ -6,8 +6,9 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { AlertCircle, Ellipsis, Trash2 } from 'lucide-react'
+import { AlertCircle, Calendar, Ellipsis, Flag, Trash2 } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
+import { PRIORITY_LABEL, PRIORITY_STYLES, formatDate } from '../constants/priority.const'
 import useUpdateTaskStatus from '../hooks/useUpdateTaskStatus'
 import { TaskItemProps } from '../interfaces/TaskItemProps'
 interface ExtendTaskItemProps extends TaskItemProps {
@@ -53,6 +54,7 @@ export default function TaskItem({ task, projectId, onDelete }: ExtendTaskItemPr
             {task.title}
           </p>
         </div>
+
         <DropdownMenu>
           <DropdownMenuTrigger
             render={
@@ -71,6 +73,37 @@ export default function TaskItem({ task, projectId, onDelete }: ExtendTaskItemPr
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+      </div>
+
+      {task.description && (
+        <p className='line-clamp-2 text-xs text-slate-500 dark:text-slate-400'>
+          {task.description}
+        </p>
+      )}
+
+      {/* Footer: priority + dates */}
+      <div className='flex items-center justify-between gap-2 pt-1'>
+        <span
+          className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium ${PRIORITY_STYLES[task.priority]}`}
+        >
+          <Flag size={10} />
+          {PRIORITY_LABEL[task.priority]}
+        </span>
+
+        <div className='flex items-center gap-2 text-[11px] text-slate-400 dark:text-slate-500'>
+          <span className='inline-flex items-center gap-1' title='Created'>
+            <Calendar size={10} />
+            {formatDate(task.createdAt)}
+          </span>
+          {task.dueDate && (
+            <span
+              className='inline-flex items-center gap-1 text-slate-500 dark:text-slate-400'
+              title='Due'
+            >
+              → {formatDate(task.dueDate)}
+            </span>
+          )}
+        </div>
       </div>
 
       {serverError && (
