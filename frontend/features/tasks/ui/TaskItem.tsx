@@ -7,11 +7,12 @@ import {
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { cn } from 'cn'
-import { AlertCircle, Calendar, Ellipsis, Flag, Trash2 } from 'lucide-react'
+import { AlertCircle, Ellipsis, Trash2 } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
-import { PRIORITY_LABEL, PRIORITY_STYLES, formatDate } from '../constants/priority.const'
 import useUpdateTaskStatus from '../hooks/useUpdateTaskStatus'
 import { TaskItemProps } from '../interfaces/TaskItemProps'
+import PriorityBadge from './PriorityBadge'
+import TaskDates from './TaskDates'
 interface ExtendTaskItemProps extends TaskItemProps {
   onDelete: (id: string) => void
 }
@@ -85,27 +86,8 @@ export default function TaskItem({ task, projectId, onDelete }: ExtendTaskItemPr
 
       {/* Footer: priority + dates */}
       <div className='flex items-center justify-between gap-2 pt-1'>
-        <span
-          className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium ${PRIORITY_STYLES[task.priority]}`}
-        >
-          <Flag size={10} />
-          {PRIORITY_LABEL[task.priority]}
-        </span>
-
-        <div className='flex items-center gap-2 text-[11px] text-slate-400 dark:text-slate-500'>
-          <span className='inline-flex items-center gap-1' title='Created'>
-            <Calendar size={10} />
-            {formatDate(task.createdAt)}
-          </span>
-          {task.dueDate && (
-            <span
-              className='inline-flex items-center gap-1 text-slate-500 dark:text-slate-400'
-              title='Due'
-            >
-              → {formatDate(task.dueDate)}
-            </span>
-          )}
-        </div>
+        <PriorityBadge priority={task.priority} />
+        <TaskDates createdAt={task.createdAt} dueDate={task.dueDate} />
       </div>
 
       {serverError && (
